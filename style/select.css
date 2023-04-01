@@ -1,0 +1,32 @@
+table{
+    width: max-content;
+}
+
+table tr{
+    text-align: left;
+}
+
+div{
+    position: absolute;
+    margin: 0 auto;
+    width: min-content;
+}
+
+.link {
+    background-color: gray;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: white;
+}
+.link:hover {
+    box-shadow: 2px 5px 5px gray;
+}
+
+p {
+    padding-bottom: 10pt;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
