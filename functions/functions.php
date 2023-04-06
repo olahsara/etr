@@ -1,4 +1,5 @@
 <?php
+const USERNAME = 'adatb'; const PASSWORD = 'adatb'; const CONNECTION_STRING = 'localhost/XE';
 /**
  * Csatlakozásért felelős függvény
  */
@@ -59,6 +60,7 @@ function getday($nap) {
         default: return "hétvége";
     }
 }
+
 
 
 

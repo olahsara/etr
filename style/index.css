@@ -22,3 +22,7 @@ div{
     font-size: 12pt;
     font-weight: bold;
 }
+.title{
+    margin: 0 auto;
+    text-align: center;
+}

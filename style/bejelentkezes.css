@@ -1,0 +1,25 @@
+div{
+    padding: 10px;
+}
+.f_label{
+    font-size: 16pt;
+    margin: 14pt;
+}
+
+.f_input{
+    margin: 14pt;
+    font-size: 16pt;
+}
+
+.kuld{
+    padding: 5pt;
+    margin: 20pt;
+    background-color: gray;
+    color: white;
+    font-size: 16pt;
+    border: none;
+}
+
+.kuld:hover{
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,40 @@
+/*Menu*/
+ul {
+    list-style-type: none;
+    margin: 0 0 20px;
+    padding: 0;
+    overflow: hidden;
+    background-color: lightgray;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+li {
+    font-size: 16pt;
+    float: left;
+}
+
+li a {
+    font-size: 16pt;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    font-size: 16pt;
+    background-color: gray;
+}
+
+.active {
+    font-size: 16pt;
+    background-color: gray;
+}
+
+.menu {
+    margin: 10pt;
+
+}
