@@ -1,38 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Bejelentkezés</title>
-    <link rel="stylesheet" href="../style/bejelentkezes.css"/>
-    <link rel="stylesheet" href="../style/menu.css"/>
-</head>
-<body>
-    <!-- MENU -->
-    <div class="menu">
-        <ul>
-            <li><a href="../index.php">Kezdőlap</a></li>
-            <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
-            <li><a href="kijelentkezes.php">Kijelentkezés</a></li>
-            <?php } else { ?>
-            <li><a  class="active" href="bejelentkezes.php">Bejelentkezés</a></li>
-            <?php }?>
-            <li><a href="../select/selectpage.php">Lekérdezések</a></li>
-        </ul>
-    </div>
+<?php
+session_start();
+include_once("../functions/functions.php");
+$neptun = $_POST['neptun'];
+$password = $_POST['password'];
+$role = $_POST['role'];
 
-    <!-- Bejelentkező űrlap -->
-    <div>
-        <form action="bejelentkezes.php" method="POST" accept-charset="utf-8">
-            <label class="f_label">Neptun kód:</label>
-            <input class="f_input" type="text" name="neptun" placeholder="Neptun kód" required />
-            <br>
-            <label class="f_label">Jelszó:</label>
-            <input class="f_input" type="password" name="password" required/>
-            <br>
-            <input class="kuld" type="submit" value="Belépés"/>
-        </form>
-    </div>
+switch ($role){
+    case 'hallgato' :
+        $select = 'SELECT ADATB."Hallgato".HALLGATO_NEV AS "nev", ADATB."Hallgato".JELSZO AS "jelszo", "ADATB"."Hallgato".NEPTUN_KOD AS "neptun", ADATB."Hallgato".FELEV AS "felev", ADATB."Hallgato".HALLGATO_ID AS "id" FROM ADATB."Hallgato"';
+
+        $params = lekerdez($select);
+
+        while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
+            if(strtolower($record["neptun"]) === strtolower($neptun) && $record["jelszo"]  === $password) {
+                $_SESSION["felhasznalo"] = $record;
+                $_SESSION["felhasznalo"]["role"] = $role;
+                $siker = "true";
+                close($params[0], $params[1]);
+            }
+        }
+        if ( $siker !== "true"){
+            die("Nincs ilyen hallgató!");
+        }
+
+        header("Location: ../index.php");
+        break;
+    case 'oktato':
+        $select = 'SELECT ADATB."Oktato".OKTATO_NEV AS "nev", ADATB."Oktato".JELSZO AS "jelszo", "ADATB"."Oktato".NEPTUN_KOD AS "neptun", ADATB."Oktato".BEOSZTAS AS "beosztas", ADATB."Oktato".OKTATO_ID AS "id" FROM ADATB."Oktato"';
+
+        $params = lekerdez($select);
+
+        while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
+            if(strtolower($record["neptun"]) === strtolower($neptun) && $record["jelszo"]  === $password) {
+                $_SESSION["felhasznalo"] = $record;
+                $_SESSION["felhasznalo"]["role"] = $role;
+                $siker = "true";
+                close($params[0], $params[1]);
+            }
+        }
+        if ( $siker !== "true"){
+            die("Nincs ilyen oktató!");
+        }
+
+        header("Location: ../index.php");
+        break;
+    case 'admin':
+        $select = 'SELECT ADATB."Admin".ADMIN_ID AS "id", ADATB."Admin".JELSZO AS "jelszo" FROM ADATB."Admin"';
+
+        $params = lekerdez($select);
+
+        while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
+            if(strtolower($record["id"]) === strtolower($neptun) && $record["jelszo"]  === $password) {
+                $_SESSION["felhasznalo"] = $record;
+                $_SESSION["felhasznalo"]["role"] = $role;
+                $siker = "true";
+                close($params[0], $params[1]);
+            }
+        }
+        if ( $siker !== "true"){
+            die("Nincs ilyen admin!");
+        }
+
+        header("Location: ../index.php");
+        break;
+}
 
 
-</body>
-</html>
+

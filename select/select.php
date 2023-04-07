@@ -29,7 +29,7 @@ switch ($selected){
             echo sprintf('<tr><td>%s</td><td>%s</td></tr>', $record['Szak nev'], $record['Kiadott diplomak szama']);
         }
         //vissza link
-        echo '</table> <div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '</table> <div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         //Kapcsolat lezárása
         close($params[0], $params[1]);
@@ -46,7 +46,7 @@ switch ($selected){
         while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
             echo sprintf('<p style="font-weight: normal;">%s,</p>', $record['TIKK szakok']);
         }
-        echo '<div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '<div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
@@ -66,7 +66,7 @@ switch ($selected){
             echo sprintf('<tr><td>%s</td><td>%s</td></tr>', $record['Szak'], $record['Hallgatok szama']);
         }
 
-        echo '</table> <div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '</table> <div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
@@ -84,7 +84,7 @@ switch ($selected){
             echo sprintf('<tr><td>%s</td><td>%s</td></tr>', $record['Kurzus neve'], $record['Uzenet']);
         }
 
-        echo '</table> <div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '</table> <div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
@@ -103,7 +103,7 @@ switch ($selected){
             echo sprintf('<tr><td>%s</td><td>%s</td><td>%d</td></tr>', $record['Terem neve'],getday($record['Nap']), $record['Ora']);
         }
 
-        echo '</table> <div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '</table> <div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
@@ -121,7 +121,7 @@ switch ($selected){
             echo sprintf('<tr><td>%s</td><td>%d</td></tr>', $record['Hallgato neve'], $record['ertesites_db']);
         }
 
-        echo '</table> <div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '</table> <div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
@@ -138,7 +138,7 @@ switch ($selected){
             echo sprintf('<tr><td>%s</td><td>%d</td></tr>', $record['Hallgato neve'], $record['Orak szama']);
         }
 
-        echo '</table> <div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '</table> <div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
@@ -152,7 +152,7 @@ switch ($selected){
             echo sprintf('<tr><td>%d</td><td>%s</td></tr>', $record['ADMIN_ID'], $record['JELSZO']);
         }
 
-        echo '</table> <div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '</table> <div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
@@ -169,7 +169,7 @@ switch ($selected){
             echo sprintf('<tr><td>%s</td><td>%d</td></tr>', $record['Kar nev'], $record['Tanarok szama']);
         }
 
-        echo '</table> <div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '</table> <div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
@@ -184,7 +184,7 @@ switch ($selected){
         while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
             echo sprintf('<p style="font-weight: normal;">%s,</p>', $record['Oktato nev']);
         }
-        echo '<div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '<div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
@@ -204,12 +204,12 @@ switch ($selected){
                          $record['Hallgato neve'], $record['Kurzus neve'], $record['Vizsganak az idopontja'], $record['Megszerzett jegy']);
         }
 
-        echo '</table> <div> <a class="link" href="selectpage.php">Vissza</a> </div>';
+        echo '</table> <div> <a class="link" href="select_page.php">Vissza</a> </div>';
 
         close($params[0], $params[1]);
         break;
     default:
-        header("Location: selectpage.php");
+        header("Location: select_page.php");
         break;
 }
 

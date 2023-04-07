@@ -18,13 +18,23 @@ session_start();
             <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
             <li><a href="be_kijelentkezes/kijelentkezes.php">Kijelentkezés</a></li>
             <?php } else { ?>
-            <li><a href="be_kijelentkezes/belepes.php">Bejelentkezés</a></li>
+            <li><a href="be_kijelentkezes/belepes_page.php">Bejelentkezés</a></li>
             <?php }?>
-            <li><a href="select/selectpage.php">Lekérdezések</a></li>
+            <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' ){ ?>
+            <li><a href="select/select_page.php">Lekérdezések</a></li>
+            <?php } ?>
         </ul>
     </div>
 
-    <div class="title"> <h1>Üdvözöllek <?php if(isset($_SESSION["felhasznalo"])) { echo $_SESSION["felhasznalo"]["nev"]; } ?>! </h1></div>
+    <div class="title"> <h1>Üdvözöllek<?php if(isset($_SESSION["felhasznalo"])) {
+                                                if ($_SESSION["felhasznalo"]["role"] === 'admin'){
+                                                    echo ' Admin';
+                                                } else {
+                                                    echo ' ' . $_SESSION["felhasznalo"]["nev"];
+                                                }
+    } else {
+        echo '! Kérlek jelentkezz be';
+            } ?>! </h1></div>
 
 </body>
 </html>
