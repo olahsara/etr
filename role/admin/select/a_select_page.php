@@ -6,23 +6,30 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Lekérdezések</title>
-    <link rel="stylesheet" href="../style/index.css"/>
-    <link rel="stylesheet" href="../style/menu.css"/>
+    <link rel="stylesheet" href="../../../style/index.css"/>
+    <link rel="stylesheet" href="../../../style/menu.css"/>
 
 </head>
 <body>
 <!-- MENU -->
 <div class="menu">
     <ul>
-        <li><a href="../index.php">Kezdőlap</a></li>
+        <li><a  href="../../../szinter/szinter_page.php">Kezdőlap</a></li>
         <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
-            <li><a href="../be_kijelentkezes/kijelentkezes.php">Kijelentkezés</a></li>
+            <li><a href="../../../be_kijelentkezes/kijelentkezes.php">Kijelentkezés</a></li>
         <?php } else { ?>
-            <li><a href="../be_kijelentkezes/belepes_page.php">Bejelentkezés</a></li>
+            <li><a href="../../../be_kijelentkezes/belepes_page.php">Bejelentkezés</a></li>
         <?php }?>
-        <li><a class="active" href="select_page.php">Lekérdezések</a></li>
+        <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' ){ ?>
+            <li><a  href="../felhasznalok/a_felhasznalok_page.php">Felhasználók</a></li>
+            <li><a  href="../kurzusok/a_kurzus_page.php">Kurzusok</a></li>
+            <li><a  href="../orarend/a_orarend_page.php">Órarend</a></li>
+            <li><a class="active" href="a_select_page.php">Lekérdezések</a></li>
+        <?php } ?>
     </ul>
 </div>
+
+<!-- LEKERDEZEZSEK -->
 <div>
     <div class="text" >Diplomák száma szakokra lebontva
         <form action="select.php" method="POST">

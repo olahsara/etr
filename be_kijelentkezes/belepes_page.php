@@ -16,12 +16,11 @@
             <?php } else { ?>
             <li><a  class="active" href="belepes.php">Bejelentkezés</a></li>
             <?php }?>
-            <li><a href="../select/select_page.php">Lekérdezések</a></li>
         </ul>
     </div>
 
     <!-- Bejelentkező űrlap -->
-    <div>
+    <div class="login_form">
         <form action="belepes.php" method="POST" accept-charset="utf-8">
             <label class="f_label">Neptun kód:
                 <input class="f_input" type="text" name="neptun" required />
