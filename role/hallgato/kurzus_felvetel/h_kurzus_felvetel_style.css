@@ -36,10 +36,9 @@ tr{
     margin: 5pt;
 }
 
-div{
-    padding-bottom: 6pt;
-}
-
 form{
     display: inline;
+}
+div {
+    padding-bottom: 6pt;
 }

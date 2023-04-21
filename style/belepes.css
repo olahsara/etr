@@ -34,3 +34,8 @@
 .kuld:hover{
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
 }
+#alcim{
+    font-size: 28pt;
+    font-weight: bold;
+    margin: 30pt;
+}

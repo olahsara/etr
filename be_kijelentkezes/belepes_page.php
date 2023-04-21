@@ -20,7 +20,9 @@
 <!--    </div>-->
 
     <!-- Bejelentkező űrlap -->
+
     <div class="login_form">
+        <div id="alcim">Bejelentkezés</div>
         <form action="belepes.php" method="POST" accept-charset="utf-8">
             <label class="f_label">Neptun kód:
                 <input class="f_input" type="text" name="neptun" required />
