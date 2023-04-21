@@ -39,6 +39,22 @@ function lekerdez($select){
     return [$stid, $conn]; //a kapcsolat lezárása miatt vissza kell adni a $conn változót is
 }
 
+
+/**
+ * Csatlakozás és adatmódostásért végrehajtásáért felelős függvény:
+ */
+function modosit($mod){
+    $conn = connection(USERNAME, PASSWORD, CONNECTION_STRING);
+    $stid = oci_parse($conn, $mod);
+
+
+    oci_execute($stid);
+    oci_commit($conn);
+
+    oci_free_statement($stid);
+    oci_close($conn);
+}
+
 /**
  * Kapcsolat lezárása
  */
