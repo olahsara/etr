@@ -8,19 +8,21 @@
 </head>
 <body>
     <!-- MENU -->
-    <div class="menu">
-        <ul>
-            <li><a href="../index.php">Kezdőlap</a></li>
-            <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
-            <li><a href="kijelentkezes.php">Kijelentkezés</a></li>
-            <?php } else { ?>
-            <li><a  class="active" href="belepes.php">Bejelentkezés</a></li>
-            <?php }?>
-        </ul>
-    </div>
+<!--    <div class="menu">-->
+<!--        <ul>-->
+<!--            <li><a href="../index.php">Kezdőlap</a></li>-->
+<!--            --><?php //if(isset($_SESSION["felhasznalo"]) ){ ?>
+<!--            <li><a href="kijelentkezes.php">Kijelentkezés</a></li>-->
+<!--            --><?php //} else { ?>
+<!--            <li><a  class="active" href="belepes.php">Bejelentkezés</a></li>-->
+<!--            --><?php //}?>
+<!--        </ul>-->
+<!--    </div>-->
 
     <!-- Bejelentkező űrlap -->
+
     <div class="login_form">
+        <div id="alcim">Bejelentkezés</div>
         <form action="belepes.php" method="POST" accept-charset="utf-8">
             <label class="f_label">Neptun kód:
                 <input class="f_input" type="text" name="neptun" required />

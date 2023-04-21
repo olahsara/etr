@@ -1,0 +1,15 @@
+#alcim{
+    font-size: 20pt;
+    font-weight: bold;
+    margin-bottom: 12pt;
+}
+.adatok{
+    position: absolute;
+    margin: 20px;
+    top: 50px;
+}
+
+div{
+    padding: 6pt;
+    font-size: 14pt;
+}
