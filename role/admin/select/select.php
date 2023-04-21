@@ -1,10 +1,10 @@
 <head>
     <meta charset="utf8">
     <title>Lekérdezés</title>
-    <link rel="stylesheet" href="../style/select.css"/>
+    <link rel="stylesheet" href="../../../style/select.css"/>
 </head>
 <?php
-include_once('../functions/functions.php');
+include_once('../../../functions/functions.php');
 
 //főoldalon megnyomott gomb lekérése
 $selected = $_POST['table'];

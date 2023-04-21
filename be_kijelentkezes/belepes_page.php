@@ -8,16 +8,16 @@
 </head>
 <body>
     <!-- MENU -->
-    <div class="menu">
-        <ul>
-            <li><a href="../index.php">Kezdőlap</a></li>
-            <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
-            <li><a href="kijelentkezes.php">Kijelentkezés</a></li>
-            <?php } else { ?>
-            <li><a  class="active" href="belepes.php">Bejelentkezés</a></li>
-            <?php }?>
-        </ul>
-    </div>
+<!--    <div class="menu">-->
+<!--        <ul>-->
+<!--            <li><a href="../index.php">Kezdőlap</a></li>-->
+<!--            --><?php //if(isset($_SESSION["felhasznalo"]) ){ ?>
+<!--            <li><a href="kijelentkezes.php">Kijelentkezés</a></li>-->
+<!--            --><?php //} else { ?>
+<!--            <li><a  class="active" href="belepes.php">Bejelentkezés</a></li>-->
+<!--            --><?php //}?>
+<!--        </ul>-->
+<!--    </div>-->
 
     <!-- Bejelentkező űrlap -->
     <div class="login_form">

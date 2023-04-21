@@ -3,6 +3,9 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/be_kijelentkezes/belepes.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/functions/functions.php" dialect="OracleSqlPlus" />
-    <file url="file://$PROJECT_DIR$/select/select.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/role/admin/select/select.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/role/hallgato/adatok/h_adatok_page.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/role/hallgato/kurzusok/h_kurzus_page.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/role/hallgato/kurzusok/h_selected_kurzus.php" dialect="GenericSQL" />
   </component>
 </project>
