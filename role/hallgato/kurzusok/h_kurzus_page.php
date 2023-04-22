@@ -31,7 +31,7 @@ include_once('../../../functions/functions.php');
 </div>
 <div class="adatok">
     <?php
-    $select = 'SELECT ADATB."Kurzus".KURZUS_NEV, ADATB."Kurzus".KURZUS_KOD, ADATB."Kurzus".AJANLOTT_FELEV, ADATB."Kurzus".KREDIT, ADATB."Hallgato".NEPTUN_KOD
+    $select = 'SELECT ADATB."Kurzus".KURZUS_NEV, ADATB."Kurzus".KURZUS_KOD, ADATB."Kurzus".AJANLOTT_FELEV, ADATB."Kurzus".KREDIT, ADATB."Kurzus".KURZUS_ID, ADATB."Hallgato".NEPTUN_KOD
                FROM ADATB."Kurzus",ADATB."Hallgato",ADATB."Hallgato_Kurzus"
                WHERE ADATB."Hallgato".HALLGATO_ID = ADATB."Hallgato_Kurzus"."hk_Hallgato_id" AND
                ADATB."Kurzus".KURZUS_ID = ADATB."Hallgato_Kurzus"."hk_Kurzus_id"';
@@ -49,7 +49,7 @@ include_once('../../../functions/functions.php');
                                 <input class="button" type="submit" value="Részletek">
                                 </form>
                                 <form action="h_kurzus_leadas.php" method="POST">
-                                <input type="hidden" name="kurzus_kod" value=' .$record['KURZUS_KOD'].'>
+                                <input type="hidden" name="kurzus_id" value=' .$record['KURZUS_ID'].'>
                                 <input type="hidden" name="kurzus_nev" value='.$record['KURZUS_NEV'].'>
                                 <input class="button" type="submit" value="Leadás">
                                 </form>
