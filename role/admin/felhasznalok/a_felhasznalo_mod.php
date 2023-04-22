@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'&&isset($_GET['value'])) {
 
     include_once('../../../functions/functions.php');
 
-    modosit($mod);
+    excecute($mod);
     header("Location: a_felhasznalok_page.php");
 }
 ?>

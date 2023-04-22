@@ -10,6 +10,7 @@ switch ($role){
         $select = 'SELECT ADATB."Hallgato".HALLGATO_NEV AS "nev", ADATB."Hallgato".JELSZO AS "jelszo", "ADATB"."Hallgato".NEPTUN_KOD AS "neptun", ADATB."Hallgato".FELEV AS "felev", ADATB."Hallgato".HALLGATO_ID AS "id" FROM ADATB."Hallgato"';
 
         $params = lekerdez($select);
+        $siker = "false";
 
         while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
             if(strtolower($record["neptun"]) === strtolower($neptun) && $record["jelszo"]  === $password) {
@@ -17,6 +18,7 @@ switch ($role){
                 $_SESSION["felhasznalo"]["role"] = $role;
                 $siker = "true";
                 close($params[0], $params[1]);
+                break;
             }
         }
         if ( $siker !== "true"){

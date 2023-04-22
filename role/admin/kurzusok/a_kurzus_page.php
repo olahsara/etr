@@ -19,10 +19,15 @@ session_start();
             <li><a href="../../../be_kijelentkezes/belepes_page.php">Bejelentkezés</a></li>
         <?php }?>
         <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' ){ ?>
-            <li><a  href="../felhasznalok/a_felhasznalok_page.php">Felhasználók</a></li>
-            <li><a class="active" href="/kurzusok_page.php">Kurzusok</a></li>
-            <li><a href="../orarend/a_orarend_page.php">Órarend</a></li>
-            <li><a href="../select/a_select_page.php">Lekérdezések</a></li>
+            <div class="dropdown">
+                <button class="dropbtn">Adatmódostás
+                </button>
+                <div class="dropdown-content">
+                    <a href="../felhasznalok/a_felhasznalok_page.php">Felhasználó</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
         <?php } ?>
     </ul>
 </div>

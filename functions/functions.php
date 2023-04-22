@@ -43,7 +43,7 @@ function lekerdez($select){
 /**
  * Csatlakozás és adatmódostásért végrehajtásáért felelős függvény:
  */
-function modosit($mod){
+function excecute($mod){
     $conn = connection(USERNAME, PASSWORD, CONNECTION_STRING);
     $stid = oci_parse($conn, $mod);
 
