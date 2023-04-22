@@ -14,12 +14,16 @@ $delete = 'DELETE FROM ADATB."Hallgato_Ora" WHERE ADATB."Hallgato_Ora"."ho_Ora_i
 
 $params = lekerdez($delete);
 
+oci_commit($params[1]);
+
 close($params[0], $params[1]);
 
 $delete = 'DELETE FROM ADATB."Hallgato_Kurzus" WHERE ADATB."Hallgato_Kurzus"."hk_Kurzus_id" = '.$_POST["kurzus_id"].'
            AND ADATB."Hallgato_Kurzus"."hk_Hallgato_id" ='.$_SESSION["felhasznalo"]["id"];
 
 $params = lekerdez($delete);
+
+oci_commit($params[1]);
 
 close($params[0], $params[1]);
 
