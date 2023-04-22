@@ -24,14 +24,22 @@ session_start();
         <?php }?>
         <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' ){ ?>
             <li><div class="dropdown">
-                <button class="dropbtn">Adatmódostás
-                </button>
-                <div class="dropdown-content">
-                    <a href="a_felhasznalok_page.php">Felhasználó</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div></li>
+                    <button class="dropbtn">Adatmódostás
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="../felhasznalok/a_felhasznalok_page.php">Felhasználó</a>
+                        <a href="../diplomak/a_diplomak_page.php">Diplomák</a>
+                        <a href="../ertesitesek/a_ertesitesek_page.php">Értestések</a>
+                        <a href="../forumok/a_forumok_page.php">Fórumok</a>
+                        <a href="../karok/a_karok_page.php">Karok</a>
+                        <a href="../szakok/a_szakok_page.php">Szakok</a>
+                        <a href="../oktatok/a_oktatok_page.php">Oktatók</a>
+                        <a href="../orak/a_orak_page.php">Órák</a>
+                        <a href="../kurzusok/a_kurzusok_page.php">Kurzusok</a>
+                        <a href="../termek/a_termek_page.php">Termek</a>
+                        <a href="../vizsgak/a_vizsgak_page.php">Vizsgák</a>
+                    </div>
+                </div></li>
         <?php } ?>
     </ul>
 </div>

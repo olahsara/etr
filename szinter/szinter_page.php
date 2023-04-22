@@ -24,8 +24,9 @@ session_start();
                     </button>
                     <div class="dropdown-content">
                         <a href="../role/admin/felhasznalok/a_felhasznalok_page.php">Felhasználó</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
+
+
+
                     </div>
                 </div></li>
         <?php } ?>
