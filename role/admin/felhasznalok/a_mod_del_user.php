@@ -77,6 +77,8 @@ session_start();
                                     </form>', $record['ID'], $record['Nev'], $record['Jelszo'], $record['Felev'], $record['Neptun-kod']);
             }
 
+
+
             echo '</table>';
 
 

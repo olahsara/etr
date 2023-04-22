@@ -44,9 +44,33 @@ FROM "Hallgato"';
     $params = lekerdez($select);
 
     echo '<table> <tr> <th>Hallgato ID</th> <th>Hallgato Nev</th> <th>Hallgato Jelszo</th> <th>Hallgato Felev</th> <th>Hallgato Neptun-kod</th> <th>Hallgato Adatainak módositasa</th> </tr>';
+
+    echo printf('<form action="a_felhasznalo_add.php" method="post">
+                                        <tr>
+                                            <td>Új Felhasználó</td>
+                                            <td>
+                                                <input type="text" name="nev" id="nev" >
+                                            </td>
+                                            <td>
+                                                <input type="text" name="jelszo" id="jelszo" >
+                                            </td>
+                                            <td>
+                                                <input type="text" name="felev" id="felev" >
+                                            </td>
+                                            <td>
+                                                <input type="text" name="neptunk" id="neptunk" >
+                                            </td>
+                                            <td>
+                                                <input type="submit" value="Add User">
+                                            </td>
+                                            </tr>
+                                    </form>');
+
     while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
         echo sprintf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td><a href="a_mod_del_user.php?value=' . urlencode($record['ID']) . '">Adatok módostása/törlése</a></td></tr>', $record['ID'], $record['Nev'], $record['Jelszo'], $record['Felev'], $record['Neptun-kod']);
     }
+
+
 
     echo '</table>';
 
