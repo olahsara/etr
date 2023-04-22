@@ -10,6 +10,7 @@ session_start();
     <meta charset="UTF-8">
     <title>Felhasználók módosit</title>
     <link rel="stylesheet" href="../../../style/menu.css"/>
+    <link rel="stylesheet" href="../../../style/admin_table.css"/>
 </head>
 <body>
 <!-- MENU -->
@@ -70,7 +71,7 @@ session_start();
                                                 <input type="text" name="neptunk" id="neptunk" value=%s>
                                             </td>
                                             <td>
-                                                <input type="submit" value="Update User">
+                                                <input class="submit" type="submit" value="Update User">
                                                 <a href="a_felhasznalo_del.php?value=' . urlencode($record['ID']) . '">Delete User</a>
                                             </td>
                                             </tr>

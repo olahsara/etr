@@ -7,6 +7,7 @@ session_start();
     <meta charset="UTF-8">
     <title>Felhasználók</title>
     <link rel="stylesheet" href="../../../style/menu.css"/>
+    <link rel="stylesheet" href="../../../style/admin_table.css"/>
 </head>
 <body>
 <!-- MENU -->
@@ -61,7 +62,7 @@ FROM "Hallgato"';
                                                 <input type="text" name="neptunk" id="neptunk" >
                                             </td>
                                             <td>
-                                                <input type="submit" value="Add User">
+                                                <input class="submit" type="submit" value="Add User">
                                             </td>
                                             </tr>
                                     </form>');
