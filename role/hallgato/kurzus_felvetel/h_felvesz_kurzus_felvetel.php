@@ -7,6 +7,8 @@
 //          session-ben lévő hallgató id-je, kiválasztott időpont ora id-je  ||
 //-----------------------------------------------------------------------------
 
+//  TODO: értesítés küldése kurzus felvétele utáng
+
 session_start();
 include_once('../../../functions/functions.php');
 

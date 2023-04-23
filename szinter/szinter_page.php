@@ -1,5 +1,8 @@
 <?php
 session_start();
+if( $_SESSION["felhasznalo"]["role"] === 'hallgato' ){
+    header("Location: ../role/hallgato/szinter/h_szinter_page.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,11 +49,6 @@ session_start();
 </div>
 
 <!-- TODO: fórum megjelenítése -->
-<?php
-if( $_SESSION["felhasznalo"]["role"] === "hallgato" ){
-    header("../role/hallgato/szinter/h_szinter_page.php");
-}
-?>
 
 </body>
 </html>

@@ -7,7 +7,7 @@ include_once ('../shared/hallgato_menu.php');
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kurzusok</title>
+    <title>Kurzusaim</title>
     <link rel="stylesheet" href="../../../style/menu.css"/>
     <link rel="stylesheet" href="h_kurzus_style.css">
 </head>

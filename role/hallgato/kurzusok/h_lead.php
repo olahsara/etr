@@ -2,6 +2,7 @@
 session_start();
 include_once('../../../functions/functions.php');
 
+//  TODO: értesítés küldése kurzus leadása után
 
 $delete = 'DELETE FROM ADATB."Hallgato_Ora" WHERE ADATB."Hallgato_Ora"."ho_Ora_id" = 
            (SELECT ADATB."Ora"."ORA_ID"
