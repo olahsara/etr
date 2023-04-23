@@ -77,6 +77,30 @@ function getday($nap) {
     }
 }
 
+/**
+ * Csúnya dátumokból szép dátumok
+*/
+
+function sajat_date($date){
+    $return_date = '';
+    $month = array(
+        "DEC" => "December", "JAN" => "Január", "FEB" => "Február",
+        "MAR" => "Március", "APR" => "Április", "MAY" => "Május",
+        "JUN" => "Június", "JUL" => "Július", "AUG" => "Augusztus",
+        "SEP" => "Szeptember", "OCT" => "Október", "NOV" => "November",
+    );
+    $pieces = explode('-',$date); // $pieces[0] == day, $pieces[1] == month, pieces[2] == year
+    $return_date .= '20'.$pieces[2];
+    foreach ($month as $m_key => $m_value ){
+        if( $m_key == $pieces[1] ){
+            $return_date .='. '.$m_value;
+        }
+    }
+    $return_date .=' '.$pieces[0].'.';
+
+    return $return_date;
+}
+
 
 
 

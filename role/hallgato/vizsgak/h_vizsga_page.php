@@ -12,33 +12,35 @@ include_once('../shared/hallgato_menu.php');
     <link rel="stylesheet" href="h_vizsga_style.css"/>
 </head>
 <body>
-<!-- MENU -->
-<div class="menu">
-    <ul>
-        <li><a href="../../../szinter/szinter_page.php">Kezdőlap</a></li>
-        <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
-            <li><a href="../../../be_kijelentkezes/kijelentkezes.php">Kijelentkezés</a></li>
-        <?php } else { ?>
-            <li><a href="../../../be_kijelentkezes/belepes_page.php">Bejelentkezés</a></li>
-        <?php }?>
-        <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'hallgato' ){ ?>
-            <li><a href="../adatok/h_adatok_page.php">Adatok</a></li>
-            <li><a href="../kurzus_felvetel/h_kurzus_felvetel_page.php">Kurzus felvétel</a></li>
-            <li><a href="../kurzusok/h_kurzus_page.php">Kurzusok</a></li>
-            <li><a href="../orarend/h_orarend_page.php">Órarend</a></li>
-            <li><a class="active" href="../vizsgak/h_vizsga_page.php">Vizsgák</a></li>
-        <?php } ?>
-    </ul>
-</div>
-
-<!-- TODO: hallagtók vizsgáinak megjelenítése -->
 
 <div class="adatok">
+    <?php
+    $select = 'SELECT ADATB."Vizsga".VIZSGA_IDOPONT, ADATB."Kurzus".KURZUS_KOD, ADATB."Kurzus".KURZUS_NEV,  ADATB."Kurzus".KURZUS_ID, ADATB."Hallgato".NEPTUN_KOD
+               FROM ADATB."Kurzus",ADATB."Vizsga",ADATB."Kuzus_Vizsga", ADATB."Hallgato", adatb."Hallgato_Kurzus"
+               WHERE ADATB."Kurzus".KURZUS_ID = ADATB."Kuzus_Vizsga"."kv_Kurzus_id" AND ADATB."Vizsga".VIZSGA_ID = ADATB."Kuzus_Vizsga"."kv_Vizsga_id" 
+               AND ADATB."Hallgato".HALLGATO_ID = ADATB."Hallgato_Kurzus"."hk_Hallgato_id" AND ADATB."Hallgato_Kurzus"."hk_Kurzus_id" = ADATB."Kurzus".KURZUS_ID';
+
+    $params = lekerdez($select);
+    echo '<div class="alcim">Vizsgák</div>';
+    echo '<table> <tr> <th >Kurzus neve</th> <th>Kódja</th> <th> Vizsga időpontja </th>  </tr>';
+    $ures = true;
+    while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
+        if( $_SESSION["felhasznalo"]["neptun"] === $record['NEPTUN_KOD']){
+            echo sprintf('<tr><td>%s</td><td>%s</td><td>%s</td></tr>',
+                $record['KURZUS_NEV'], $record['KURZUS_KOD'], sajat_date($record['VIZSGA_IDOPONT']));
+                $ures = false;
+        }
+    }
+    if ($ures){
+        echo '<tr><td>Nincs vizsgád</td><td></td><td></td></tr>';
+    }
+    echo '</table>';
+
+    close($params[0], $params[1]);
+    ?>
 
 
 </div>
-
-
 
 </body>
 </html>
