@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once('../../../functions/functions.php');
+include_once ('../shared/hallgato_menu.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,24 +12,7 @@ include_once('../../../functions/functions.php');
     <link rel="stylesheet" href="h_kurzus_style.css">
 </head>
 <body>
-<!-- MENU -->
-<div class="menu">
-    <ul>
-        <li><a href="../../../szinter/szinter_page.php">Kezdőlap</a></li>
-        <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
-            <li><a href="../../../be_kijelentkezes/kijelentkezes.php">Kijelentkezés</a></li>
-        <?php } else { ?>
-            <li><a href="../../../be_kijelentkezes/belepes_page.php">Bejelentkezés</a></li>
-        <?php }?>
-        <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'hallgato' ){ ?>
-            <li><a href="../adatok/h_adatok_page.php">Adatok</a></li>
-            <li><a href="../kurzus_felvetel/h_kurzus_felvetel_page.php">Kurzus felvétel</a></li>
-            <li><a class="active" href="../kurzusok/h_kurzus_page.php">Kurzusok</a></li>
-            <li><a href="../orarend/h_orarend_page.php">Órarend</a></li>
-            <li><a href="../vizsgak/h_vizsga_page.php">Vizsgák</a></li>
-        <?php } ?>
-    </ul>
-</div>
+
 <div class="adatok">
     <?php
     $select = 'SELECT ADATB."Kurzus".KURZUS_NEV, ADATB."Kurzus".KURZUS_KOD, ADATB."Kurzus".AJANLOTT_FELEV, ADATB."Kurzus".KREDIT, ADATB."Kurzus".KURZUS_ID, ADATB."Hallgato".NEPTUN_KOD
@@ -45,7 +29,7 @@ include_once('../../../functions/functions.php');
                             <td>
                                 <form action="h_selected_kurzus.php" method="POST">
                                 <input type="hidden" name="kurzus_kod" value=' .$record['KURZUS_KOD'].'>
-                                <input type="hidden" name="kurzus_nev" value='.$record['KURZUS_NEV'].'>
+                                <input type="hidden" name="kurzus_nev" value='.$record['KURZUS_NEV']. '>
                                 <input class="button" type="submit" value="Részletek">
                                 </form>
                                 <form action="h_kurzus_leadas.php" method="POST">

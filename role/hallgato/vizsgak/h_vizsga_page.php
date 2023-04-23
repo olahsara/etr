@@ -1,5 +1,7 @@
 <?php
 session_start();
+include_once('../../../functions/functions.php');
+include_once('../shared/hallgato_menu.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <title>Vizsgák</title>
     <link rel="stylesheet" href="../../../style/menu.css"/>
+    <link rel="stylesheet" href="h_vizsga_style.css"/>
 </head>
 <body>
 <!-- MENU -->
@@ -28,7 +31,14 @@ session_start();
     </ul>
 </div>
 
-<!-- TODO: vizsgák megjelenítése, felvétele, leadása (hallgató) -->
+<!-- TODO: hallagtók vizsgáinak megjelenítése -->
+
+<div class="adatok">
+
+
+</div>
+
+
 
 </body>
 </html>

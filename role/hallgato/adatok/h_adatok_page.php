@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once('../../../functions/functions.php');
+include_once ('../shared/hallgato_menu.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,24 +12,6 @@ include_once('../../../functions/functions.php');
     <link rel="stylesheet" href="h_adatok_style.css"/>
 </head>
 <body>
-<!-- MENU -->
-<div class="menu">
-    <ul>
-        <li><a href="../../../szinter/szinter_page.php">Kezdőlap</a></li>
-        <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
-            <li><a href="../../../be_kijelentkezes/kijelentkezes.php">Kijelentkezés</a></li>
-        <?php } else { ?>
-            <li><a href="../../../be_kijelentkezes/belepes_page.php">Bejelentkezés</a></li>
-        <?php }?>
-        <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'hallgato' ){ ?>
-            <li><a class="active" href="../adatok/h_adatok_page.php">Adatok</a></li>
-            <li><a href="../kurzus_felvetel/h_kurzus_felvetel_page.php">Kurzus felvétel</a></li>
-            <li><a href="../kurzusok/h_kurzus_page.php">Kurzusok</a></li>
-            <li><a href="../orarend/h_orarend_page.php">Órarend</a></li>
-            <li><a href="../vizsgak/h_vizsga_page.php">Vizsgák</a></li>
-        <?php } ?>
-    </ul>
-</div>
 
 <div class="adatok">
     <?php
@@ -38,7 +21,8 @@ include_once('../../../functions/functions.php');
                FROM ADATB."Hallgato",ADATB."Szak_Kar",ADATB."Szak", ADATB."Kar", ADATB."Hallgato_Szak"
                WHERE "Hallgato".HALLGATO_ID = "Hallgato_Szak"."hs_Hallgato_id" AND "Hallgato_Szak"."hs_Szak_id"="Szak".SZAK_ID
                AND "Kar".KAR_ID = "Szak_Kar"."sk_Kar_id" AND "Szak_Kar"."sk_Szak_id" = "Szak".SZAK_ID';
-
+    $page = explode('/',$_SERVER['PHP_SELF']);
+    end($page);
     $params = lekerdez($select);
     echo '<div id="alcim">Hallgató adatai</div>';
     while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
@@ -48,9 +32,10 @@ include_once('../../../functions/functions.php');
                                  <div><b>Hallgató neptun kódja:</b> %s</div>
                                  <div><b>Kar:</b> %s (%s)</div>
                                  <div><b>Szak:</b> %s (%s)</div>
-                                 <div><b>Félév:</b> %d</div>'
+                                 <div><b>Félév:</b> %d</div>
+                                 <div><b>%s</b></div>'
                 , $record['HALLGATO_NEV'], $record['NEPTUN_KOD'], $record['KAR_NEV'], $record['KAR_KOD']
-                , $record['SZAK_NEV'], $record['SZAK_KOD'], $record['FELEV']);
+                , $record['SZAK_NEV'], $record['SZAK_KOD'], $record['FELEV'], current($page));
             break;
         }
     }
