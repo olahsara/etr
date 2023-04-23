@@ -9,7 +9,15 @@ $page = explode('/',$_SERVER['PHP_SELF']);
 ?>
 <div class="menu">
     <ul>
-        <li<?php if(end($page)==="szinter_page.php")   { echo " class=\"active\""; } ?>><a href="../../../szinter/szinter_page.php"> Kezdőlap</a></li>
+        <li<?php if(end($page)==="szinter_page.php" || end($page)==="h_ertesites_page.php")    { echo " class=\"active\""; } ?>><div class="dropdown">
+                <button class="dropbtn">Kezdőlap
+                </button>
+                <div class="dropdown-content">
+                    <a href="../../../szinter/szinter_page.php">Szintér</a>
+                    <a href="../ertesites/h_ertesites_page.php">Értesítések</a>
+                </div>
+            </div>
+        </li>
         <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
             <li<?php if(end($page)==="kijelentkezes.php")   { echo " class=\"active\""; } ?>><a href="../../../be_kijelentkezes/kijelentkezes.php"> Kijelentkezés</a></li>
         <?php } else { ?>

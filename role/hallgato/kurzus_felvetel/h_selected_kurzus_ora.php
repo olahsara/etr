@@ -33,6 +33,7 @@ include_once ('../shared/hallgato_menu.php');
                             <td>
                                 <form action="h_felvesz_kurzus_felvetel.php" method="POST">
                                 <input type="hidden" name="kurzus_id" value=' .$record['KURZUS_ID'].'>
+                                <input type="hidden" name="kurzus_nev" value=' .$record['KURZUS_NEV'].'>
                                 <input type="hidden" name="ora_id" value='.$record['ORA_ID'].'>
                                 <input class="button" type="submit" value="Felvétel">
                                 </form>
