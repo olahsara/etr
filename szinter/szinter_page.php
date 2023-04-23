@@ -46,6 +46,11 @@ session_start();
 </div>
 
 <!-- TODO: fórum megjelenítése -->
+<?php
+if( $_SESSION["felhasznalo"]["role"] === "hallgato" ){
+    header("../role/hallgato/szinter/h_szinter_page.php");
+}
+?>
 
 </body>
 </html>
