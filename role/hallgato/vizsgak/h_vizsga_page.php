@@ -32,7 +32,7 @@ include_once('../shared/hallgato_menu.php');
         }
     }
     if ($ures){
-        echo '<tr><td>Nincs vizsgád</td><td></td><td></td></tr>';
+        echo '<tr><td>Nincs vizsgád!</td><td></td><td></td></tr>';
     }
     echo '</table>';
 

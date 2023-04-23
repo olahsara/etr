@@ -32,10 +32,9 @@ include_once ('../shared/hallgato_menu.php');
                                  <div><b>Hallgató neptun kódja:</b> %s</div>
                                  <div><b>Kar:</b> %s (%s)</div>
                                  <div><b>Szak:</b> %s (%s)</div>
-                                 <div><b>Félév:</b> %d</div>
-                                 <div><b>%s</b></div>'
+                                 <div><b>Félév:</b> %d</div>'
                 , $record['HALLGATO_NEV'], $record['NEPTUN_KOD'], $record['KAR_NEV'], $record['KAR_KOD']
-                , $record['SZAK_NEV'], $record['SZAK_KOD'], $record['FELEV'], current($page));
+                , $record['SZAK_NEV'], $record['SZAK_KOD'], $record['FELEV']);
             break;
         }
     }
