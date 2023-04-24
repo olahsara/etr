@@ -1,10 +1,19 @@
 <?php
 session_start();
-
+?>
+<?php
 $tabla = "Hallgato_Diploma";
+$elso_oszlop = "hd_Hallgato_id";
+$masodik_oszlop = "hd_Diploma_id";
+$elso_ertek = "9";
+$masodik_ertek = "1";
 
-if (isset($_GET['value'])) {
-    $tabla = $_GET['value'];
+if (isset($_GET['tabla'])) {
+    $tabla = $_GET['tabla'];
+    $elso_oszlop = $_GET['elso'];
+    $masodik_oszlop = $_GET['masodik'];
+    $elso_ertek = $_GET['harmadik'];
+    $masodik_ertek = $_GET['negyedik'];
 }
 ?>
 
@@ -54,42 +63,35 @@ if (isset($_GET['value'])) {
     <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' ){
 
 
-        if (isset($_GET['value'])) {
-            $value = $_GET['value'];
+        if (isset($_GET['tabla'])) {
 
             include_once('../../../functions/functions.php');
 
-            $select = 'SELECT *
-                        FROM "'.$tabla.'"
-                        WHERE XXX_ID=' . $value;
-
-            $params = lekerdez($select);
-
-            echo '<table> <tr> XXX </tr>';
-            while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo '<table><tr><th> '.$elso_oszlop.' </th><th>'.$masodik_oszlop.'</th><th></th></tr>';
 
                 echo sprintf('
-                                    <form action="a_xxx_mod.php?value=' . urlencode($record['ID']) . '" method="post">
+                                    <form action="a_kapcsolat_mod.php?tabla='.$tabla.'&elso_ertek='.$elso_ertek.'&masodik_ertek='.$masodik_ertek.'&elso_oszlop='.$elso_oszlop.'&masodik_oszlop='.$masodik_oszlop.'" method="post">
                                         <tr>
-                                            <td>%s</td>
+                                            
+                                        
                                             <td>
-                                                <input type="text" name="XXX" id="XXX" value=%s>
+                                                <input type="text" name="elso" id="elso" value=%s>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="masodik" id="masodik" value=%s>
                                             </td>
                                             
                                             <td>
-                                                <input class="submit" type="submit" value="Update XXX">
-                                                <a href="a_xxx_del.php?value=' . urlencode($record['ID']) . '">Delete XXX</a>
+                                                <input class="submit" type="submit" value="Update">
+                                                <a href="a_kapcsolat_del.php?tabla='.$tabla.'&elso_ertek='.$elso_ertek.'&masodik_ertek='.$masodik_ertek.'&elso_oszlop='.$elso_oszlop.'&masodik_oszlop='.$masodik_oszlop.'">Delete</a>
                                             </td>
-                                            </tr>
-                                    </form>', $record['ID'], $record['XXX']);
+                                        </tr>
+                                    </form>', $elso_ertek, $masodik_ertek);
             }
-
-
-
             echo '</table>';
 
 
-            close($params[0], $params[1]);
+
 
         } else {
             echo 'Nem tudom hogy jutottal ide de nem kellet volna :/';
@@ -98,7 +100,7 @@ if (isset($_GET['value'])) {
 
         ?>
 
-    <?php } ?>
+
 
 </body>
 </html>

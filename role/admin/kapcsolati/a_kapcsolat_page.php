@@ -62,7 +62,7 @@ if (isset($_GET['value'])) {
 
     echo '<table> <tr> <th> </th><th>'.$oszlopnevek[1].' </th> <th>'.$oszlopnevek[3].'</th>  <th>'.$tabla.' Adatainak módositasa</th> </tr>';
 
-    printf('<form action="a_kapcsolat_add.php" method="post">
+    printf('<form action="a_kapcsolat_add.php?tabla='.$tabla.'&elso_oszlop='.$oszlopnevek[1].'&masodik_oszlop='.$oszlopnevek[3].'" method="post">
                                         <tr>
                                             <td>Új '.$tabla.'</td>
                                             <td>
@@ -79,7 +79,13 @@ if (isset($_GET['value'])) {
                                     </form>');
 
     while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-        echo sprintf('<tr><td></td><td>%s</td><td>%s</td><td><a href="a_mod_del_kapcsolat.php?value=' . urlencode($tabla) . '">Adatok módostása/törlése</a></td></tr>', $record[$oszlopnevek[1]], $record[$oszlopnevek[3]]);
+        echo sprintf('<tr><td></td><td>%s</td><td>%s</td><td><a 
+                                href="a_mod_del_kapcsolat.php?tabla=' . urlencode($tabla) .
+                                '&elso='.urlencode($oszlopnevek[1]).
+                                '&masodik='.urlencode($oszlopnevek[3]).
+                                '&harmadik='.urlencode($record[$oszlopnevek[1]]).
+                                '&negyedik='.urlencode($record[$oszlopnevek[3]]).
+                                '">Adatok módostása/törlése</a></td></tr>', $record[$oszlopnevek[1]], $record[$oszlopnevek[3]]);
     }
 
 
