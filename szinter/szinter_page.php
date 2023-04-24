@@ -27,11 +27,43 @@ if( $_SESSION["felhasznalo"]["role"] === 'hallgato' ){
                     </button>
                     <div class="dropdown-content">
                         <a href="../role/admin/felhasznalok/a_felhasznalok_page.php">Felhasználó</a>
-
-
-
+                        <a href="../role/admin/diplomak/a_diplomak_page.php">Diplomák</a>
+                        <a href="../role/admin/ertesitesek/a_ertesitesek_page.php">Értestések</a>
+                        <a href="../role/admin/forumok/a_forumok_page.php">Fórumok</a>
+                        <a href="../role/admin/karok/a_karok_page.php">Karok</a>
+                        <a href="../role/admin/szakok/a_szakok_page.php">Szakok</a>
+                        <a href="../role/admin/oktatok/a_oktatok_page.php">Oktatók</a>
+                        <a href="../role/admin/orak/a_orak_page.php">Órák</a>
+                        <a href="../role/admin/kurzusok/a_kurzusok_page.php">Kurzusok</a>
+                        <a href="../role/admin/termek/a_termek_page.php">Termek</a>
+                        <a href="../role/admin/vizsgak/a_vizsgak_page.php">Vizsgák</a>
                     </div>
                 </div></li>
+                <li><div class="dropdown">
+                        <button class="dropbtn">Kapcsolati
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Diploma">Hallgato_Diploma</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Ertesites">Hallgato_Ertesites</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Forum">Hallgato_Forum</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Kurzus">Hallgato_Kurzus NAGY BAJ</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Ora">Hallgato_Ora</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Szak">Hallgato_Szak</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Kuzus_Forum">Kuzus_Forum</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Kuzus_Oktato">Kuzus_Oktato</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Kuzus_Ora">Kuzus_Ora</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Kuzus_Szak">Kuzus_Szak</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Kuzus_Terem">Kuzus_Terem</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Kuzus_Vizsga">Kuzus_Vizsga</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Oktato_Forum">Oktato_Forum</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Oktato_Kar">Oktato_Kar</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Oktato_Ora">Oktato_Ora</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Szak_Diploma">Szak_Diploma</a>
+                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Szak_Kar">Szak_Kar</a>
+
+
+                        </div>
+                    </div></li>
         <?php } ?>
         <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'hallgato' ){ ?>
             <li><a href="../role/hallgato/adatok/h_adatok_page.php">Adatok</a></li>
