@@ -19,7 +19,7 @@ include_once ('../shared/hallgato_menu.php');
                    FROM ADATB."Kurzus",ADATB."Hallgato",ADATB."Hallgato_Kurzus"
                    WHERE ADATB."Hallgato".HALLGATO_ID = ADATB."Hallgato_Kurzus"."hk_Hallgato_id"
                    AND ADATB."Kurzus".KURZUS_ID = ADATB."Hallgato_Kurzus"."hk_Kurzus_id"
-                   AND ADATB."Hallgato".HALLGATO_ID = '. $_SESSION["felhasznalo"]["id"];
+                   AND ADATB."Hallgato".HALLGATO_ID LIKE '. $_SESSION["felhasznalo"]["id"];
 
     $seged_params = lekerdez($seged_select);
 

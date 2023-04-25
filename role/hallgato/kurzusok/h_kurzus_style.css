@@ -35,6 +35,9 @@ tr{
     cursor: pointer;
     margin: 5pt;
 }
+.button:hover{
+    background-color: gray;
+}
 
 div{
     padding-bottom: 6pt;

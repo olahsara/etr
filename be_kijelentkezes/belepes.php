@@ -31,6 +31,7 @@ switch ($role){
         $select = 'SELECT ADATB."Oktato".OKTATO_NEV AS "nev", ADATB."Oktato".JELSZO AS "jelszo", "ADATB"."Oktato".NEPTUN_KOD AS "neptun", ADATB."Oktato".BEOSZTAS AS "beosztas", ADATB."Oktato".OKTATO_ID AS "id" FROM ADATB."Oktato"';
 
         $params = lekerdez($select);
+        $siker = 'false';
 
         while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
             if(strtolower($record["neptun"]) === strtolower($neptun) && $record["jelszo"]  === $password) {

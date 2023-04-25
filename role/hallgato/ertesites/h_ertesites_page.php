@@ -17,9 +17,9 @@ include_once ('../shared/hallgato_menu.php');
     <?php
     $select = 'SELECT ADATB."Ertesites".UZENET, ADATB."Ertesites".ERTESITES_IDOPONT, ADATB."Hallgato".HALLGATO_ID
                FROM ADATB."Ertesites",ADATB."Hallgato",ADATB."Hallgato_Ertesites"
-               WHERE ADATB."Hallgato".HALLGATO_ID = ADATB."Hallgato_Ertesites"."he_Ertesites_id" AND
+               WHERE ADATB."Hallgato".HALLGATO_ID = ADATB."Hallgato_Ertesites"."he_Hallgato_id" AND
                ADATB."Ertesites".ERTESITES_ID = ADATB."Hallgato_Ertesites"."he_Ertesites_id" 
-               AND ADATB."Hallgato".HALLGATO_ID = '.$_SESSION["felhasznalo"]["id"];
+               AND ADATB."Hallgato".HALLGATO_ID LIKE '.$_SESSION["felhasznalo"]["id"];
 
     $params = lekerdez($select);
     echo '<div id="alcim">Értesítések</div>';
