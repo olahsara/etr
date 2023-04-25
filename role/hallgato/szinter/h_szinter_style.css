@@ -1,0 +1,64 @@
+#alcim{
+    margin-top: 12pt;
+    font-size: 20pt;
+    font-weight: bold;
+    margin-bottom: 12pt;
+}
+.date{
+    font-size: 10pt;
+    color: gray;
+    margin-left: 20px;
+}
+.uzenet{
+    margin-left: 20px;
+}
+.kuldo {
+    font-weight: bold;
+}
+.bejegyzes {
+    margin-bottom: 20px;
+}
+.szinter{
+    position: absolute;
+    margin: 20px;
+    top: 50px;
+    width: 100%;
+    font-size: 14pt;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    padding: 20px;
+    font-size: 14pt;
+}
+
+a:hover{
+    color: gray;
+    font-weight:bold;
+    font-size: 15pt
+}
+
+div {
+    padding-bottom: 6pt;
+}
+
+textarea {
+    width: 400px;
+    height: 100px;
+}
+.button{
+    background-color: lightgray;
+    border: none;
+    color: white;
+    padding: 3pt;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12pt;
+    cursor: pointer;
+    margin: 5pt;
+}
+.button:hover{
+    background-color: gray;
+}
+
