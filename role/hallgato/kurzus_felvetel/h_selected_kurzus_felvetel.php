@@ -16,7 +16,7 @@ include_once ('../shared/hallgato_menu.php');
     <?php
     $select = 'SELECT ADATB."Szak".SZAK_NEV, ADATB."Szak".SZAK_KOD,
                ADATB."Kar".KAR_KOD, ADATB."Kar".KAR_NEV,
-               ADATB."Oktato".OKTATO_NEV, ADATB."Kurzus".KURZUS_KOD, ADATB."Kurzus".KURZUS_NEV
+               ADATB."Oktato".OKTATO_NEV, ADATB."Kurzus".KURZUS_KOD, ADATB."Kurzus".KURZUS_NEV, ADATB."Kurzus".KURZUS_ID
                FROM ADATB."Kurzus", ADATB."Szak", ADATB."Kar", ADATB."Oktato",
                ADATB."Kuzus_Szak", ADATB."Kuzus_Oktato", ADATB."Szak_Kar"
                WHERE ADATB."Szak_Kar"."sk_Szak_id" = ADATB."Szak".SZAK_ID AND ADATB."Szak_Kar"."sk_Kar_id" = ADATB."Kar".KAR_ID
@@ -26,13 +26,14 @@ include_once ('../shared/hallgato_menu.php');
     $params = lekerdez($select);
     echo '<div id="alcim">'.$_POST['kurzus_nev'].'</div>';
     while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-        if( $_POST['kurzus_kod'] === $record['KURZUS_KOD'] ){
+        if( $_POST['kurzus_id'] === $record['KURZUS_ID'] ){
             echo sprintf('<div><b>Kurzus kódja:</b> %s</div>
                                  <div><b>Szak:</b> %s (%s)</div>
                                  <div><b>Kar:</b> %s (%s)</div>
                                  <div><b>Felelős oktató:</b> %s </div>
                                  <div>
                                     <form action="h_selected_kurzus_ora.php" method="POST">
+                                    <input type="hidden" name="kurzus_id" value=' .$record['KURZUS_ID'].'>
                                     <input type="hidden" name="kurzus_kod" value=' .$record['KURZUS_KOD'].'>
                                     <input type="hidden" name="kurzus_nev" value=' .$record['KURZUS_NEV'].'>
                                     <input class="button" type="submit" value="Időpontok">

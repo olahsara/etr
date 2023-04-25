@@ -50,7 +50,7 @@ include_once ('../shared/hallgato_menu.php');
             echo sprintf('<tr><td>%s</td><td>%s</td><td>%d</td><td>%d</td>
                             <td>
                                 <form action="h_selected_kurzus_felvetel.php" method="POST">
-                                <input type="hidden" name="kurzus_kod" value=' .$record['KURZUS_KOD'].'>
+                                <input type="hidden" name="kurzus_id" value=' .$record['KURZUS_ID'].'>
                                 <input type="hidden" name="kurzus_nev" value='.$record['KURZUS_NEV'].'>
                                 <input class="button" type="submit" value="Részletek">
                                 </form>

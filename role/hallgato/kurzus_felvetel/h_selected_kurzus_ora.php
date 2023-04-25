@@ -28,7 +28,7 @@ include_once ('../shared/hallgato_menu.php');
     echo '<div id="alcim">'.$_POST['kurzus_nev'].' felvehető időpontjai</div>';
     echo '<table> <tr> <th >Időpont</th> <th>Helyszín</th> <th>Oktató</th> <th>Férőhely</th> <th></th> </tr>';
     while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-        if( $_POST['kurzus_kod'] === $record['KURZUS_KOD'] ){
+        if( $_POST['kurzus_id'] === $record['KURZUS_ID'] ){
             echo sprintf('<tr><td>%s, %d óra</td><td>%s, %s terem</td><td>%s</td><td>%d</td>
                             <td>
                                 <form action="h_felvesz_kurzus_felvetel.php" method="POST">

@@ -22,7 +22,7 @@ include_once('../shared/hallgato_menu.php');
 
         echo '<div id="alcim">Kurzusfórumok:</div>';
         while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-                echo '<a href="h_kurzus_szinter.php?id='.urlencode($record['KURZUS_ID']).'&name='.urlencode($record['KURZUS_NEV']).'">'.$record['KURZUS_NEV'].'</a>';
+                echo '<div><a href="h_kurzus_szinter.php?id='.urlencode($record['KURZUS_ID']).'&name='.urlencode($record['KURZUS_NEV']).'">'.$record['KURZUS_NEV'].'</a></div>';
         }
         close($params[0], $params[1]);
         ?>

@@ -19,7 +19,7 @@ oci_commit($params[1]);
 close($params[0], $params[1]);
 
 $insert2= 'INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") 
-           VALUES (\''.$_SESSION["felhasznalo"]["id"].'\',\''.$_POST["kurzus_id"].'\')';
+           VALUES (\''.$_SESSION["felhasznalo"]["id"].'\',\''.$_POST["ora_id"].'\')';
 $params2 = lekerdez($insert2);
 
 oci_commit($params2[1]);
