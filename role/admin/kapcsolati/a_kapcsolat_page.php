@@ -58,11 +58,18 @@ if (isset($_GET['value'])) {
     $select = 'SELECT * FROM "'.$tabla.'"';
 
     $params = lekerdez($select);
-    $oszlopnevek = array_keys(oci_fetch_array($params[0]));
+    $ures = false;
+    try {
+        $oszlopnevek = array_keys(oci_fetch_array($params[0]));
+    } catch (TypeError $e) {
+        $ures = true;
+        echo "Ures a tabla kerlek adj hozza adatot manualisan az adatbazishoz!";
+    }
 
-    echo '<table> <tr> <th> </th><th>'.$oszlopnevek[1].' </th> <th>'.$oszlopnevek[3].'</th>  <th>'.$tabla.' Adatainak módositasa</th> </tr>';
+    if (!$ures){
+        echo '<table> <tr> <th> </th><th>'.$oszlopnevek[1].' </th> <th>'.$oszlopnevek[3].'</th>  <th>'.$tabla.' Adatainak módositasa</th> </tr>';
 
-    printf('<form action="a_kapcsolat_add.php?tabla='.$tabla.'&elso_oszlop='.$oszlopnevek[1].'&masodik_oszlop='.$oszlopnevek[3].'" method="post">
+        printf('<form action="a_kapcsolat_add.php?tabla='.$tabla.'&elso_oszlop='.$oszlopnevek[1].'&masodik_oszlop='.$oszlopnevek[3].'" method="post">
                                         <tr>
                                             <td>Új '.$tabla.'</td>
                                             <td>
@@ -78,19 +85,21 @@ if (isset($_GET['value'])) {
                                             </tr>
                                     </form>');
 
-    while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-        echo sprintf('<tr><td></td><td>%s</td><td>%s</td><td><a 
+        while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo sprintf('<tr><td></td><td>%s</td><td>%s</td><td><a 
                                 href="a_mod_del_kapcsolat.php?tabla=' . urlencode($tabla) .
-                                '&elso='.urlencode($oszlopnevek[1]).
-                                '&masodik='.urlencode($oszlopnevek[3]).
-                                '&harmadik='.urlencode($record[$oszlopnevek[1]]).
-                                '&negyedik='.urlencode($record[$oszlopnevek[3]]).
-                                '">Adatok módostása/törlése</a></td></tr>', $record[$oszlopnevek[1]], $record[$oszlopnevek[3]]);
+                '&elso='.urlencode($oszlopnevek[1]).
+                '&masodik='.urlencode($oszlopnevek[3]).
+                '&harmadik='.urlencode($record[$oszlopnevek[1]]).
+                '&negyedik='.urlencode($record[$oszlopnevek[3]]).
+                '">Adatok módostása/törlése</a></td></tr>', $record[$oszlopnevek[1]], $record[$oszlopnevek[3]]);
+        }
+
+
+
+        echo '</table>';
     }
 
-
-
-    echo '</table>';
 
     close($params[0], $params[1]);
     ?>
