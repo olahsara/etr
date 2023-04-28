@@ -46,7 +46,6 @@ if( $_SESSION["felhasznalo"]["role"] === 'hallgato' ){
                             <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Diploma">Hallgato_Diploma</a>
                             <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Ertesites">Hallgato_Ertesites</a>
                             <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Forum">Hallgato_Forum</a>
-                            <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Kurzus">Hallgato_Kurzus NAGY BAJ</a>
                             <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Ora">Hallgato_Ora</a>
                             <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Hallgato_Szak">Hallgato_Szak</a>
                             <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Kuzus_Forum">Kuzus_Forum</a>
@@ -60,8 +59,6 @@ if( $_SESSION["felhasznalo"]["role"] === 'hallgato' ){
                             <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Oktato_Ora">Oktato_Ora</a>
                             <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Szak_Diploma">Szak_Diploma</a>
                             <a href="../role/admin/kapcsolati/a_kapcsolat_page.php?value=Szak_Kar">Szak_Kar</a>
-
-
                         </div>
                     </div></li>
         <?php } ?>
