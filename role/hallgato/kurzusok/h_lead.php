@@ -7,7 +7,6 @@ $ora_id_select = 'SELECT ADATB."Ora"."ORA_ID"
                   WHERE ADATB."Kuzus_Ora"."ko_Kurzus_id" = ADATB."Kurzus".KURZUS_ID AND ADATB."Kuzus_Ora"."ko_Ora_id" = ADATB."Ora".ORA_ID
                   AND ADATB."Hallgato".HALLGATO_ID = ADATB."Hallgato_Ora"."ho_Hallgato_id" AND ADATB."Ora".ORA_ID = ADATB."Hallgato_Ora"."ho_Ora_id"
                   AND ADATB."Hallgato".HALLGATO_ID LIKE '.$_SESSION["felhasznalo"]["id"].' AND ADATB."Kurzus".KURZUS_ID LIKE '.$kurzus_id;
-echo $ora_id_select;
 $ora_params = lekerdez($ora_id_select);
 
 global $ora_id;
