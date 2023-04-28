@@ -13,7 +13,7 @@ switch ($role){
         $siker = "false";
 
         while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-            if(strtolower($record["neptun"]) === strtolower($neptun) && $record["jelszo"]  === $password) {
+            if(strtolower($record["neptun"]) === strtolower($neptun) && password_verify($password,$record["jelszo"])) {
                 $_SESSION["felhasznalo"] = $record;
                 $_SESSION["felhasznalo"]["role"] = $role;
                 $siker = "true";
@@ -34,11 +34,12 @@ switch ($role){
         $siker = 'false';
 
         while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-            if(strtolower($record["neptun"]) === strtolower($neptun) && $record["jelszo"]  === $password) {
+            if(strtolower($record["neptun"]) === strtolower($neptun) && password_verify($password,$record["jelszo"])) {
                 $_SESSION["felhasznalo"] = $record;
                 $_SESSION["felhasznalo"]["role"] = $role;
                 $siker = "true";
                 close($params[0], $params[1]);
+                break;
             }
         }
         if ( $siker !== "true"){
@@ -54,7 +55,7 @@ switch ($role){
         $siker = "false";
 
         while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-            if(strtolower($record["id"]) === strtolower($neptun) && $record["jelszo"]  === $password) {
+            if(strtolower($record["id"]) === strtolower($neptun) && password_verify($password,$record["jelszo"])) {
                 $_SESSION["felhasznalo"] = $record;
                 $_SESSION["felhasznalo"]["role"] = $role;
                 $siker = "true";

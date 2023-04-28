@@ -1,0 +1,8 @@
+Admin:
+1==>"admin"
+
+Hallgato:
+neptun==>"hallgato"
+
+Oktato:
+Neptun==>"oktato"

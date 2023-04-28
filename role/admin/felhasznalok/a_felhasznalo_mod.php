@@ -3,6 +3,7 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST'&&isset($_GET['value'])) {
     $nev = $_POST['nev'];
     $jelszo = $_POST['jelszo'];
+    $jelszo = password_hash($jelszo, PASSWORD_DEFAULT);
     $felev = $_POST['felev'];
     $neptunk = $_POST['neptunk'];
     $value = $_GET['value'];
