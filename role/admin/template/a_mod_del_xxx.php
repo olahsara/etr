@@ -67,7 +67,7 @@ session_start();
                                         <tr>
                                             <td>%s</td>
                                             <td>
-                                                <input type="text" name="XXX" id="XXX" value=%s>
+                                                <input type="text" name="XXX" id="XXX" value="%s">
                                             </td>
                                             
                                             <td>

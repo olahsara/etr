@@ -69,16 +69,16 @@ session_start();
                                             <td>%s</td>
                                          
                                             <td>
-                                                <input type="text" name="OKTATO_NEV" id="OKTATO_NEV" value=%s>
+                                                <input type="text" name="OKTATO_NEV" id="OKTATO_NEV" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="JELSZO" id="JELSZO" value=%s>
+                                                <input type="text" name="JELSZO" id="JELSZO" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="BEOSZTAS" id="BEOSZTAS" value=%s>
+                                                <input type="text" name="BEOSZTAS" id="BEOSZTAS" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="NEPTUN_KOD" id="NEPTUN_KOD" value=%s>
+                                                <input type="text" name="NEPTUN_KOD" id="NEPTUN_KOD" value="%s">
                                             </td>
                                             
                                             <td>

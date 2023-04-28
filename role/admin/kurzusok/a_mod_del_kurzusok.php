@@ -69,22 +69,22 @@ session_start();
                                             <td>%s</td>
                                             
                                             <td>
-                                                <input type="text" name="KURZUS_KOD" id="KURZUS_KOD" value=%s>
+                                                <input type="text" name="KURZUS_KOD" id="KURZUS_KOD" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="KURZUS_NEV" id="KURZUS_NEV" value=%s>
+                                                <input type="text" name="KURZUS_NEV" id="KURZUS_NEV" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="AJANLOTT_FELEV" id="AJANLOTT_FELEV" value=%s>
+                                                <input type="text" name="AJANLOTT_FELEV" id="AJANLOTT_FELEV" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="KREDIT" id="KREDIT" value=%s>
+                                                <input type="text" name="KREDIT" id="KREDIT" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="ORASZAM" id="ORASZAM" value=%s>
+                                                <input type="text" name="ORASZAM" id="ORASZAM" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="MEGNYITVA" id="MEGNYITVA" value=%s>
+                                                <input type="text" name="MEGNYITVA" id="MEGNYITVA" value="%s">
                                             </td>
                                             
                                             <td>

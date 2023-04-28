@@ -68,16 +68,16 @@ session_start();
                                         <tr>
                                             <td>%s</td>
                                             <td>
-                                                <input type="text" name="TEREM_NEV" id="TEREM_NEV" value=%s>
+                                                <input type="text" name="TEREM_NEV" id="TEREM_NEV" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="EPULET" id="EPULET" value=%s>
+                                                <input type="text" name="EPULET" id="EPULET" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="FEROHELY" id="FEROHELY" value=%s>
+                                                <input type="text" name="FEROHELY" id="FEROHELY" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="GEPEK_SZAMA" id="GEPEK_SZAMA" value=%s>
+                                                <input type="text" name="GEPEK_SZAMA" id="GEPEK_SZAMA" value="%s">
                                             </td>
                                             <td>
                                                 <input class="submit" type="submit" value="Update Terem">

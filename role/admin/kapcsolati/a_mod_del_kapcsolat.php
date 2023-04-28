@@ -75,10 +75,10 @@ if (isset($_GET['tabla'])) {
                                             
                                         
                                             <td>
-                                                <input type="text" name="elso" id="elso" value=%s>
+                                                <input type="text" name="elso" id="elso" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="masodik" id="masodik" value=%s>
+                                                <input type="text" name="masodik" id="masodik" value="%s">
                                             </td>
                                             
                                             <td>

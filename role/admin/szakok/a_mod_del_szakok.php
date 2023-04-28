@@ -68,10 +68,10 @@ session_start();
                                         <tr>
                                             <td>%s</td>
                                             <td>
-                                                <input type="text" name="KAR_NEV" id="KAR_NEV" value=%s>
+                                                <input type="text" name="KAR_NEV" id="KAR_NEV" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="KAR_KOD" id="KAR_KOD" value=%s>
+                                                <input type="text" name="KAR_KOD" id="KAR_KOD" value="%s">
                                             </td>
                                             
                                             <td>

@@ -67,14 +67,14 @@ session_start();
                                         <tr>
                                             <td>%s</td>
                                             <td>
-                                                <input type="text" name="ZV" id="ZV" value=%s>
+                                                <input type="text" name="ZV" id="ZV" value="%s">
                                             </td>
                                             
                                             <td>
-                                                <input type="text" name="Vegzes" id="Vegzes" value=%s>
+                                                <input type="text" name="Vegzes" id="Vegzes" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="Kredit" id="Kredit" value=%s>
+                                                <input type="text" name="Kredit" id="Kredit" value="%s">
                                             </td>
                                             <td>
                                                 <input class="submit" type="submit" value="Update Diploma">

@@ -69,10 +69,10 @@ session_start();
                                             <td>%s</td>
                                             
                                             <td>
-                                                <input type="text" name="NAP" id="NAP" value=%s>
+                                                <input type="text" name="NAP" id="NAP" value="%s">
                                             </td>
                                             <td>
-                                                <input type="text" name="ORA" id="ORA" value=%s>
+                                                <input type="text" name="ORA" id="ORA" value="%s">
                                             </td>
                                             <td>
                                                 <input class="submit" type="submit" value="Update Ora">
