@@ -1,0 +1,24 @@
+//Értesítés kurzus leadás/felvétel után:
+CREATE OR REPLACE TRIGGER ertesites
+    AFTER INSERT OR DELETE
+    ON "Hallgato_Kurzus"
+    FOR EACH ROW
+    DECLARE
+        datum DATE;
+        e_uzenet ADATB."Ertesites".UZENET%TYPE;
+        kurzus ADATB."Kurzus".KURZUS_NEV%TYPE;
+        e_id ADATB."Ertesites".ERTESITES_ID%TYPE;
+    BEGIN
+        SELECT KURZUS_NEV INTO kurzus FROM "Kurzus" WHERE KURZUS_ID = :NEW."hk_Kurzus_id";
+        datum := CURRENT_DATE;
+        IF INSERTING THEN
+            e_uzenet := CONCAT('Sikeresen felvetted az alábbi kurzust: ', kurzus);
+        ELSIF DELETING THEN
+            e_uzenet := CONCAT('Sikeresen leadtad az alábbi kurzust: ', kurzus);
+        END IF;
+        INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES ( datum, e_uzenet);
+        SELECT ERTESITES_ID INTO e_id FROM "Ertesites" WHERE UZENET = e_uzenet AND ERTESITES_IDOPONT = datum;
+        INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (:NEW."hk_Hallgato_id", e_id);
+    END;
+
+ALTER TRIGGER ertesites ENABLE;
