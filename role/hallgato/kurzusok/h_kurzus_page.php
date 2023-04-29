@@ -1,17 +1,23 @@
 <?php
 session_start();
 include_once('../../../functions/functions.php');
-include_once('../../../nav/nav_bar.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Kurzusaim</title>
-    <link rel="stylesheet" href="/etr/style/menu.css"/>
-    <link rel="stylesheet" href="h_kurzus_style.css">
+    <link rel="stylesheet" href="../../../style/egesz.css"/>
 </head>
 <body>
+<div class="page">
+    <div class="pageHeader">
+        <img src="../../../style/kep.jpg" alt="Neptunusz" width="950" height="300">
+        <div>
+            <?php include_once('../../../nav/nav_bar.php');?>
+        </div>
+        <div class="pageContent">
 
 <div class="adatok">
     <?php
@@ -48,6 +54,8 @@ include_once('../../../nav/nav_bar.php');
     ?>
 
 </div>
-
+        </div>
+    </div>
+</div>
 </body>
 </html>

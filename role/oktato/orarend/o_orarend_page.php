@@ -7,25 +7,16 @@ include_once('../../../functions/functions.php');
 <head>
     <meta charset="UTF-8">
     <title>Órarend</title>
-    <link rel="stylesheet" href="../../../style/menu.css"/>
-    <link rel="stylesheet" href="o_orarend_style.css"/>
+    <link rel="stylesheet" href="../../../style/egesz.css"/>
 </head>
 <body>
-<!-- MENU -->
-<div class="menu">
-    <ul>
-        <li><a href="../szinter/o_szinter_page.php">Kezdőlap</a></li>
-        <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
-            <li><a href="../../../be_kijelentkezes/kijelentkezes.php">Kijelentkezés</a></li>
-        <?php } else { ?>
-            <li><a href="../../../be_kijelentkezes/belepes_page.php">Bejelentkezés</a></li>
-        <?php }?>
-        <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'oktato' ){ ?>
-            <li><a href="../kurzusok/o_kurzus_page.php">Kurzusok</a></li>
-            <li><a class="active" href="o_orarend_page.php">Órarend</a></li>
-            <li><a href="../vizsgak/o_vizsga_page.php">Vizsgák</a></li>
-        <?php } ?>
-    </ul>
+<div class="page">
+    <div class="pageHeader">
+        <img src="../../../style/kep.jpg" alt="Neptunusz" width="950" height="300">
+        <div>
+            <?php include_once('../../../nav/nav_bar.php');?>
+        </div>
+        <div class="pageContent">
 
 
 <div class="adatok">
@@ -73,6 +64,8 @@ include_once('../../../functions/functions.php');
     echo '</table>';
     ?>
 </div>
-
+        </div>
+    </div>
+</div>
 </body>
 </html>
