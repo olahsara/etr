@@ -25,20 +25,13 @@ li a {
 }
 
 li a:hover:not(.active) {
-    font-size: 16pt;
     background-color: gray;
 }
 
 .active {
-    font-size: 16pt;
     background-color: gray;
 }
 
-.menu {
-    position: absolute;
-    top:0;
-    width: 100%;
-}
 
 .dropdown {
     float: left;

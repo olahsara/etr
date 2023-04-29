@@ -1,0 +1,276 @@
+BODY {
+    margin: 20px 0px 20px 0px;
+    background-image:url("hatter.jpg");
+    font-family: arial;
+    font-size: 12pt;
+}
+
+.page{
+    display: block;
+    width: 1000px;
+    min-height: 800px;
+    overflow: auto;
+    margin: 0px auto 0px auto;
+    box-sizing: border-box;
+}
+
+.pageHeader{
+    float: left;
+    clear: none;
+    min-height: 150px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color:white;
+
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #2659aa;
+}
+
+.topnav a {
+    float: left;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #999D9C;
+    color: white;
+}
+
+
+
+.pageContent{
+    background-color: #FFFFFF;
+    float: left;
+    clear: none;
+    min-height: 550px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+.pageFooter{
+    background-color: #2659aa;
+    float: left;
+    clear: none;
+    min-height: 50px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+    color: #FFFFFF;
+    margin-top: 30px;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #2659aa;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #999D9C;
+}
+
+urlap {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+a.one {
+    width: 100%;
+    background-color: #2659aa;
+    color: white;
+    padding: 15px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+a.one:hover {
+    background-color: #999D9C;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+
+
+table a,.submit{
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #000000;
+    background-color: lightgrey;
+    border-color: lightgray;
+}
+
+table a,.submit:hover {
+    color: #fff;
+    background-color:gray;
+    border-color: gray;
+}
+
+/*Menu*/
+ul {
+    list-style-type: none;
+    margin: 0 0 20px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #2659aa;
+    top: 0;
+    width: 100%;
+    height: 50px;
+}
+
+li {
+    font-size: 16pt;
+    float: left;
+}
+
+li a {
+    font-size: 16pt;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: gray;
+}
+
+.active {
+    background-color: gray;
+}
+
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    background-color: inherit;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: gray;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.alcim {
+    font-size: 32px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+#alcim {
+    font-size: 32px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}

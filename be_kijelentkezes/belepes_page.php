@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Bejelentkezés</title>
-    <link rel="stylesheet" href="../style/belepes.css"/>
-    <link rel="stylesheet" href="../style/menu.css"/>
+
+    <link rel="stylesheet" href="../style/egesz.css"/>
 </head>
 <body>
+<div class="page">
+    <div class="pageHeader">
+        <img src="../style/kep.jpg" alt="Neptunusz" width="950" height="300">
+
+        <div class="pageContent">
     <!-- MENU -->
 <!--    <div class="menu">-->
 <!--        <ul>-->
@@ -25,11 +30,11 @@
         <div id="alcim">Bejelentkezés</div>
         <form action="belepes.php" method="POST" accept-charset="utf-8">
             <label class="f_label">Neptun kód:
-                <input class="f_input" type="text" name="neptun" required />
+                <input type="text" name="neptun" required />
             </label>
             <br>
             <label class="f_label">Jelszó:
-                <input class="f_input" type="password" name="password" required/>
+                <input type="password" name="password" required/>
             </label>
             <br>
             <label class="f_label">Felhasználó típusa:
@@ -44,6 +49,8 @@
         </form>
     </div>
 
-
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/etr/style/menu.css"/>
+
     <title></title>
 </head>
 <?php
@@ -94,7 +94,7 @@ $page = explode('/',$_SERVER['PHP_SELF']);
 
 <!-- OKTATO ----------------------------------------------------------------------------------------------------------->
         <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'oktato' ){ ?>
-            <li<?php if(end($page)==="szinter_page.php" )    { echo " class=\"active\""; } ?>><a href="/etr/szinter/szinter_page.php">Kezdőlap</a></li>
+            <li<?php if(end($page)==="o_szinter_page.php" )    { echo " class=\"active\""; } ?>><a href="/etr/role/oktato/szinter/o_szinter_page.php">Kezdőlap</a></li>
             <li<?php if(end($page)==="kijelentkezes.php")   { echo " class=\"active\""; } ?>><a href="/etr/be_kijelentkezes/kijelentkezes.php"> Kijelentkezés</a></li>
 
             <li<?php if(end($page)==="o_kurzus_page.php")   { echo " class=\"active\""; } ?>><a href="/etr/role/oktato/kurzusok/o_kurzus_page.php">Kurzusok</a></li>
