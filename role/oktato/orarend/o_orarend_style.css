@@ -1,0 +1,42 @@
+#alcim{
+    margin-top: 12pt;
+    font-size: 20pt;
+    font-weight: bold;
+    margin-bottom: 12pt;
+}
+.adatok{
+    position: absolute;
+    margin: 20px;
+    top: 50px;
+    width: 100%;
+    font-size: 14pt;
+}
+
+table{
+    align-self: center;
+    border-collapse: collapse;
+    width: fit-content;
+    height: max-content;
+    border: 2pt solid black;
+    font-size: 12pt
+}
+th{
+    text-align: center;
+    border: 1pt solid black;
+    font-size: 14pt;
+}
+
+td{
+    border: 1pt solid black;
+    width: 20%;
+}
+
+tr{
+    border: 1pt solid black;
+    width: 20%;
+    padding: 12pt;
+}
+
+div {
+    padding-bottom: 6pt;
+}
