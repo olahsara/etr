@@ -1,4 +1,4 @@
-create trigger ERTESITES2
+CREATE OR REPLACE TRIGGER ERTESITES2
     after insert
     on "Kuzus_Forum"
     for each row
@@ -17,5 +17,5 @@ DECLARE
         FORALL  i in  my_data.FIRST..my_data.LAST INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (my_data(i),My_Eretsites_id);
     END;
 
-ALTER TRIGGER ertesites ENABLE;
+ALTER TRIGGER ERTESITES2 ENABLE;
 

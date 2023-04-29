@@ -1,4 +1,4 @@
-create trigger TEREM_GEPSZAM
+CREATE OR REPLACE TRIGGER TEREM_GEPSZAM
     before update
     on "Terem"
     for each row
@@ -8,4 +8,4 @@ BEGIN
         end if;
     END;
 
-ALTER TRIGGER ertesites ENABLE;
+ALTER TRIGGER TEREM_GEPSZAM ENABLE;

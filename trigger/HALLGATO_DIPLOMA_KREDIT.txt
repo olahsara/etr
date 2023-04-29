@@ -1,4 +1,4 @@
-create trigger HALLGATO_DIPLOMA_KREDIT
+CREATE OR REPLACE TRIGGER HALLGATO_DIPLOMA_KREDIT
     before insert
     on "Hallgato_Diploma"
     for each row
@@ -9,5 +9,5 @@ BEGIN
     UPDATE "Diploma" SET KREDIT=my_kredit WHERE DIPLOMA_ID=:NEW."hd_Diploma_id";
 END;
 
-ALTER TRIGGER ertesites ENABLE;
+ALTER TRIGGER HALLGATO_DIPLOMA_KREDIT ENABLE;
 

@@ -1,4 +1,4 @@
-create trigger HALLGATO_SZAK_VALT
+CREATE OR REPLACE TRIGGER HALLGATO_SZAK_VALT
     before insert
     on "Hallgato_Szak"
     for each row
@@ -11,5 +11,5 @@ BEGIN
     END IF;
 END;
 
-ALTER TRIGGER ertesites ENABLE;
+ALTER TRIGGER HALLGATO_SZAK_VALT ENABLE;
 

@@ -1,4 +1,4 @@
-create trigger HALLGATO_SZAK_KURZUS
+CREATE OR REPLACE TRIGGER HALLGATO_SZAK_KURZUS
     after update
     on "Hallgato_Szak"
     for each row
@@ -6,5 +6,5 @@ BEGIN
     DELETE "Hallgato_Kurzus" WHERE "hk_Hallgato_id"=:NEW."hs_Hallgato_id";
 END;
 
-ALTER TRIGGER ertesites ENABLE;
+ALTER TRIGGER HALLGATO_SZAK_KURZUS ENABLE;
 
