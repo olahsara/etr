@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('../../../nav/nav_bar.php');
+
 ?>
 
 
@@ -10,10 +10,16 @@ include_once('../../../nav/nav_bar.php');
 <head>
     <meta charset="UTF-8">
     <title>XXX módosit</title>
-    <link rel="stylesheet" href="/etr/style/menu.css"/>
-    <link rel="stylesheet" href="../../../style/admin_table.css"/>
+    <link rel="stylesheet" href="../../../style/egesz.css"/>
 </head>
 <body>
+<div class="page">
+    <div class="pageHeader">
+        <img src="../../../style/kep.jpg" alt="Neptunusz" width="950" height="300">
+        <div>
+            <?php include_once('../../../nav/nav_bar.php');?>
+        </div>
+        <div class="pageContent">
 <!-- MENU -->
 <!--<div class="menu">-->
 <!--    <ul>-->
@@ -94,6 +100,8 @@ include_once('../../../nav/nav_bar.php');
         ?>
 
     <?php } ?>
-
+</div>
+        </div>
+    </div>
 </body>
 </html>

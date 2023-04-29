@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('../../../nav/nav_bar.php');
+
 ?>
 <?php
 $tabla = "Hallgato_Diploma";
@@ -25,10 +25,16 @@ if (isset($_GET['tabla'])) {
 <head>
     <meta charset="UTF-8">
     <title><?PHP echo $tabla;?> módosit</title>
-    <link rel="stylesheet" href="/etr/style/menu.css"/>
-    <link rel="stylesheet" href="../../../style/admin_table.css"/>
+    <link rel="stylesheet" href="../../../style/egesz.css"/>
 </head>
 <body>
+<div class="page">
+    <div class="pageHeader">
+        <img src="../../../style/kep.jpg" alt="Neptunusz" width="950" height="300">
+        <div>
+            <?php include_once('../../../nav/nav_bar.php');?>
+        </div>
+        <div class="pageContent">
 <!-- MENU -->
 <!--<div class="menu">-->
 <!--    <ul>-->
@@ -102,6 +108,8 @@ if (isset($_GET['tabla'])) {
         ?>
 
 
-
+</div>
+        </div>
+    </div>
 </body>
 </html>
