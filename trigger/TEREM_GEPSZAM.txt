@@ -1,0 +1,11 @@
+create trigger TEREM_GEPSZAM
+    before update
+    on "Terem"
+    for each row
+BEGIN
+        if :NEW."GEPEK_SZAMA">:NEW."FEROHELY" THEN
+            :NEW."GEPEK_SZAMA":=:NEW."FEROHELY";
+        end if;
+    END;
+
+ALTER TRIGGER ertesites ENABLE;

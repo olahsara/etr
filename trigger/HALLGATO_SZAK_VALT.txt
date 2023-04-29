@@ -1,0 +1,15 @@
+create trigger HALLGATO_SZAK_VALT
+    before insert
+    on "Hallgato_Szak"
+    for each row
+DECLARE
+    l_count NUMBER;
+BEGIN
+    SELECT NVL(COUNT(*), 0) INTO l_count FROM "Hallgato_Szak" WHERE "hs_Hallgato_id"=:NEW."hs_Hallgato_id";
+    IF l_count != 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Nem engedelyezett tobb mint egy szakon lennie a hallgatonak');
+    END IF;
+END;
+
+ALTER TRIGGER ertesites ENABLE;
+

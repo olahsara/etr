@@ -1,0 +1,21 @@
+create trigger ERTESITES2
+    after insert
+    on "Kuzus_Forum"
+    for each row
+DECLARE
+    My_Eretsites_id ADATB."Ertesites".ERTESITES_ID%TYPE;
+    My_Forum_id ADATB."Forum".UZENET_ID%TYPE;
+    my_UZENET_IDOPONT ADATB."Forum".UZENET_IDOPONT%TYPE;
+    my_UZENET ADATB."Forum".UZENET%TYPE;
+    TYPE my_table_type IS TABLE OF ADATB."Hallgato".HALLGATO_ID%TYPE;
+    my_data my_table_type;
+    BEGIN
+        SELECT UZENET_ID , UZENET , UZENET_IDOPONT INTO My_Forum_id,my_UZENET,my_UZENET_IDOPONT FROM "Forum" WHERE UZENET_ID  = :NEW."kf_Forum_id";
+        INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (my_UZENET_IDOPONT,my_UZENET);
+        SELECT max(ERTESITES_ID) INTO My_Eretsites_id FROM "Ertesites";
+        SELECT "hk_Hallgato_id" BULK COLLECT INTO my_data FROM "Hallgato_Kurzus" WHERE "hk_Kurzus_id" = :NEW."kf_Kurzus_id";
+        FORALL  i in  my_data.FIRST..my_data.LAST INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (my_data(i),My_Eretsites_id);
+    END;
+
+ALTER TRIGGER ertesites ENABLE;
+

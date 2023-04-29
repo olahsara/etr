@@ -1,0 +1,24 @@
+create trigger TRG_KURZUS_DELETE
+    instead of delete
+    on "Kurzus"
+    for each row
+    COMPOUND TRIGGER
+
+    TYPE my_table_type IS TABLE OF ADATB."Hallgato".HALLGATO_ID%TYPE;
+    my_data my_table_type;
+    kur_id NUMBER;
+
+    AFTER EACH ROW IS
+    BEGIN
+        kur_id := :old.KURZUS_ID;
+        SELECT "ko_Ora_id" BULK COLLECT INTO my_data FROM "Kuzus_Ora" WHERE "ko_Kurzus_id" = :old.KURZUS_ID;
+        DELETE "Kuzus_Ora" WHERE "ko_Kurzus_id" = :old.KURZUS_ID;
+    END AFTER EACH ROW;
+
+    AFTER STATEMENT IS
+    BEGIN
+        FORALL  i in  my_data.FIRST..my_data.LAST DELETE FROM "Ora" WHERE "Ora".ORA_ID = my_data(i);
+    END AFTER STATEMENT;
+END;
+/
+

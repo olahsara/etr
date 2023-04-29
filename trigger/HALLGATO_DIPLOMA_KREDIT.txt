@@ -1,0 +1,13 @@
+create trigger HALLGATO_DIPLOMA_KREDIT
+    before insert
+    on "Hallgato_Diploma"
+    for each row
+DECLARE
+    my_kredit NUMBER;
+BEGIN
+    SELECT SUM(KREDIT) INTO my_kredit FROM "Hallgato_Kurzus","Kurzus" WHERE "hk_Hallgato_id"=:NEW."hd_Hallgato_id" AND "hk_Kurzus_id" = KURZUS_ID;
+    UPDATE "Diploma" SET KREDIT=my_kredit WHERE DIPLOMA_ID=:NEW."hd_Diploma_id";
+END;
+
+ALTER TRIGGER ertesites ENABLE;
+
