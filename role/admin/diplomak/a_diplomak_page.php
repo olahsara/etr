@@ -1,12 +1,13 @@
 <?php
 session_start();
+include_once('../../../nav/nav_bar.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Diplomak</title>
-    <link rel="stylesheet" href="../../../style/menu.css"/>
+    <link rel="stylesheet" href="/etr/style/menu.css"/>
     <link rel="stylesheet" href="../../../style/admin_table.css"/>
 </head>
 <body>

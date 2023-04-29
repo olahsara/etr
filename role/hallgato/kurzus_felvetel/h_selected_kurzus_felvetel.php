@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once('../../../functions/functions.php');
-include_once ('../shared/hallgato_menu.php');
+include_once('../../../nav/nav_bar.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

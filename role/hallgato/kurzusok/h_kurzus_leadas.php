@@ -1,14 +1,14 @@
 <?php
 session_start();
 include_once('../../../functions/functions.php');
-include_once('../shared/hallgato_menu.php');
+include_once('../../../nav/nav_bar.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title><?php echo $_POST['kurzus_nev'].' leadása'; ?></title>
-    <link rel="stylesheet" href="../../../style/menu.css"/>
+    <link rel="stylesheet" href="/etr/style/menu.css"/>
     <link rel="stylesheet" href="h_kurzus_style.css">
 </head>
 <body>
