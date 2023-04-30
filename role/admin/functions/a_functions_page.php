@@ -25,6 +25,7 @@ session_start();
                                     <form action="a_function1.php" method="post">
                                         <tr>
                                             <td>
+                                                <label>Félév:</label>
                                                 <input type="text" name="FELEV" id="FELEV">
                                             </td>
                                             
@@ -39,6 +40,7 @@ session_start();
                                     <form action="a_function2.php" method="post">
                                         <tr>
                                             <td>
+                                            <label>Férőhely:</label>
                                                 <input type="text" name="FEROHELY" id="FEROHELY">
                                             </td>
                                             
@@ -53,6 +55,7 @@ session_start();
                                     <form action="a_function3.php" method="post">
                                         <tr>
                                             <td>
+                                            <label>Félév:</label>
                                                 <input type="text" name="FELEV" id="FELEV">
                                             </td>
                                             
@@ -61,9 +64,29 @@ session_start();
                                             </td>
                                             </tr>
                                     </form>');
+                 echo ('
+                <p>Diplomák számának lekérése bizonyos évben bizonyos zv-jeggyel</p>
+                <form action="a_function4.php" method="post">
+                    <tr>
+                        <td>
+                        <label>Év:</label>
+                            <input type="text" name="EV" id="EV">
+                        </td>
+                        <td>
+                        <label>Zv-jegy:</label>
+                            <input type="text" name="ZV" id="ZV">
+                        </td>
+
+                        <td>
+                            <input class="submit" type="submit" value="Search Diploma">
+                        </td>
+                    </tr>
+                </form>');
 
 
                 } ?>
+
+
 
 
 

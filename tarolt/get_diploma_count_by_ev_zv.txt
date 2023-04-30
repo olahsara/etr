@@ -1,0 +1,13 @@
+CREATE OR REPLACE FUNCTION get_diploma_count_by_ev_zv(my_ev IN NUMBER,my_zv IN NUMBER)
+RETURN NUMBER
+AS
+  diploma_count NUMBER;
+BEGIN
+  SELECT count(*)
+  INTO diploma_count
+  FROM "Diploma"
+  WHERE VEGZES_EVE=my_ev AND ZV_JEGY = my_zv;
+
+  RETURN diploma_count;
+END;
+/
