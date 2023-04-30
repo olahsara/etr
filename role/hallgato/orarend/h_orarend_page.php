@@ -21,48 +21,63 @@ include_once('../../../functions/functions.php');
 
 <div class="adatok">
     <?php
-    $select = 'SELECT ADATB."Kurzus".KURZUS_NEV, ADATB."Kurzus".KURZUS_KOD,
-                   ADATB."Oktato".OKTATO_NEV,
-                   ADATB."Ora".ORA, ADATB."Ora".NAP,
-                   ADATB."Terem".EPULET, ADATB."Terem".TEREM_NEV, 
-                   ADATB."Hallgato".NEPTUN_KOD
-                   FROM ADATB."Kurzus", ADATB."Oktato", ADATB."Ora", ADATB."Terem", ADATB."Hallgato",
-                   ADATB."Kuzus_Ora", ADATB."Hallgato_Ora", ADATB."Oktato_Ora", ADATB."Kuzus_Terem"
-                   WHERE ADATB."Kurzus".KURZUS_ID = ADATB."Kuzus_Terem"."kt_Kurzus_id" AND ADATB."Kuzus_Terem"."kt_Terem_id" = ADATB."Terem".TEREM_ID 
-                   AND ADATB."Hallgato".HALLGATO_ID = ADATB."Hallgato_Ora"."ho_Hallgato_id" AND ADATB."Hallgato_Ora"."ho_Ora_id" = ADATB."Ora".ORA_ID
-                   AND ADATB."Oktato".OKTATO_ID = ADATB."Oktato_Ora"."oo_Oktato_id" AND ADATB."Ora".ORA_ID = ADATB."Oktato_Ora"."oo_Ora_id"
-                   AND ADATB."Kurzus".KURZUS_ID = ADATB."Kuzus_Ora"."ko_Kurzus_id" AND ADATB."Kuzus_Ora"."ko_Ora_id" = ADATB."Ora".ORA_ID
-                   ORDER BY ADATB."Ora".ORA';
 
-    $params = lekerdez($select);
-    $table = array();
+    $table =array();
+    $ora = 8;
+    for ($i = 0; $i < 13; $i++){
+        $nap = 1;
+        for($j = 0; $j < 5; $j++) {
+
+            $conn = oci_connect('adatb', 'adatb', 'localhost/XE');
+            if (!$conn) {
+                $e = oci_error();
+                trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+            }
+
+            $stid = oci_parse($conn, 'begin :r := orarend_fun(:n, :o, :h); end;');
+            oci_bind_by_name($stid, ':n', $nap);
+            oci_bind_by_name($stid, ':o', $ora);
+            oci_bind_by_name($stid, ':h', $_SESSION["felhasznalo"]["id"]);
+            oci_bind_by_name($stid, ':r', $r, 500);
+
+            oci_execute($stid);
+            global $table;
+            $table[$i][$j] = $r;
+            oci_free_statement($stid);
+            oci_close($conn);
+
+            $nap++;
+        }
+        $ora++;
+    }
 
     echo '<div id="alcim"></div>';
-    echo '<table> <tr> <th>Hétfő</th> <th>Kedd</th> <th>Szerda</th> <th>Csütörtök</th> <th>Péntek</th> </tr>';
-    $napok = array(1,2,3,4,5);
-    while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-        global $table;
-        if( $record['NEPTUN_KOD'] === $_SESSION['felhasznalo']['neptun'] ){
-            $table[$record['NAP']] = $record;
-
-            echo '<tr>';
-            foreach ($napok as $nap){
-                if(empty($table[$nap])){
-                    echo '<td></td>';
-                } else {
-                    echo '<td><b>'.$table[$nap]['KURZUS_NEV'].'</b><br>'
-                          .$table[$nap]['OKTATO_NEV'].'<br>'
-                          .$table[$nap]['EPULET'].', '.$table[$nap]['TEREM_NEV'].'<br>'
-                          .$table[$nap]['ORA'].' óra <br>
-                          </td>';
-                    $table[$nap] = [];
-                }
+    echo '<table> <tr><th>Óra</th> <th>Hétfő</th> <th>Kedd</th> <th>Szerda</th> <th>Csütörtök</th> <th>Péntek</th> </tr>';
+    $ora = 8;
+    for ($i = 0; $i < 13; $i++) {
+        echo '<tr>';
+        echo '<td>';
+        echo $ora.':00';
+        echo '</td>';
+        for ($j = 0; $j < 5; $j++) {
+            if($table[$i][$j] !== 'Nincs ora' ) {
+                $tmp = explode('/',$table[$i][$j]);
+                echo '<td>';
+                echo '<b>'.$tmp[1].' ('.$tmp[0].')</b><br>'
+                    .$tmp[2].'<br>'
+                    .$tmp[3].', '.$tmp[4].'<br>
+                    Óraszám: '.$tmp[5];
+                echo '</td>';
+            } else {
+                $tmp = '';
+                echo '<td>';
+                echo $tmp;
+                echo '</td>';
             }
-            echo '</tr>';
         }
-
+        echo '</tr>';
+        $ora++;
     }
-    close($params[0], $params[1]);
 
     echo '</table>';
     ?>
