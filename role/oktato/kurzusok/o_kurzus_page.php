@@ -73,9 +73,25 @@ include_once('../../../functions/functions.php');
         </form>';
 
 
+    echo ('
+                                    <p>Kurzus összlétszám lekérése</p>
+                                    <form action="o_function.php" method="post">
+                                        <tr>
+                                            <td>
+                                                <input type="text" name="kurzus" id="kurzus">
+                                            </td>
+                                            
+                                            <td>
+                                                <input class="submit" type="submit" value="Lekérés">
+                                            </td>
+                                            </tr>
+                                    </form>');
+
     close($params2[0], $params2[1]);
 
     close($params[0], $params[1]);
+    close($params3[0], $params3[1]);
+
     ?>
 
 </div>
