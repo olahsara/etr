@@ -14,6 +14,7 @@ $page = explode('/',$_SERVER['PHP_SELF']);
         <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' ){ ?>
             <li<?php if(end($page)==="szinter_page.php" )    { echo " class=\"active\""; } ?>><a href="/etr/szinter/szinter_page.php">Kezdőlap</a></li>
             <li<?php if(end($page)==="kijelentkezes.php")   { echo " class=\"active\""; } ?>><a href="/etr/be_kijelentkezes/kijelentkezes.php"> Kijelentkezés</a></li>
+            <li<?php if(end($page)==="a_functions_page.php")   { echo " class=\"active\""; } ?>><a href="/etr/role/admin/functions/a_functions_page.php"> Adatlekérdez</a></li>
 
             <li<?php if(end($page)==="a_felhasznalok_page.php" || end($page)==="a_diplomak_page.php"
                 || end($page)==="a_ertesitesek_page.php" || end($page)==="a_forumok_page.php"
