@@ -1,7 +1,7 @@
 create FUNCTION orarend_fun(selected_nap IN ADATB."Ora".NAP%TYPE, selected_ora IN ADATB."Ora".ORA%TYPE, selected_hallgato IN ADATB."Hallgato".HALLGATO_ID%TYPE)
 RETURN VARCHAR2
 IS
-    visszaad VARCHAR2(500);
+    visszaad VARCHAR2(501);
     v_kurzusnev ADATB."Kurzus".KURZUS_NEV%TYPE;
     v_kurzuskod ADATB."Kurzus".KURZUS_KOD%TYPE;
     v_oraszam ADATB."Kurzus".ORASZAM%TYPE;

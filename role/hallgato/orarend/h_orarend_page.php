@@ -38,7 +38,7 @@ include_once('../../../functions/functions.php');
             oci_bind_by_name($stid, ':n', $nap);
             oci_bind_by_name($stid, ':o', $ora);
             oci_bind_by_name($stid, ':h', $_SESSION["felhasznalo"]["id"]);
-            oci_bind_by_name($stid, ':r', $r, 500);
+            oci_bind_by_name($stid, ':r', $r, 501);
 
             oci_execute($stid);
             global $table;
