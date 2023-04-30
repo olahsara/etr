@@ -1,0 +1,13 @@
+CREATE OR REPLACE FUNCTION get_kurzus_by_felev(my_felev IN NUMBER)
+RETURN VARCHAR
+AS
+  kurzus_varcar VARCHAR2(1000);
+BEGIN
+  SELECT listagg(KURZUS_NEV, ', ') WITHIN GROUP ( ORDER BY KURZUS_NEV)
+  INTO kurzus_varcar
+  FROM "Kurzus"
+  WHERE "Kurzus".AJANLOTT_FELEV > my_felev;
+
+  RETURN kurzus_varcar;
+END;
+/

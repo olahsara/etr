@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fórum</title>
+    <title>function2</title>
     <link rel="stylesheet" href="../../../style/egesz.css"/>
 </head>
 <body>

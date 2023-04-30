@@ -43,7 +43,21 @@ session_start();
                                             </td>
                                             
                                             <td>
-                                                <input class="submit" type="submit" value="Search Users">
+                                                <input class="submit" type="submit" value="Search Classroom">
+                                            </td>
+                                            </tr>
+                                    </form>');
+
+                    echo ('
+                                    <p>Kurzusok lekérése ajánlott félév alapján</p>
+                                    <form action="a_function3.php" method="post">
+                                        <tr>
+                                            <td>
+                                                <input type="text" name="FELEV" id="FELEV">
+                                            </td>
+                                            
+                                            <td>
+                                                <input class="submit" type="submit" value="Search Course">
                                             </td>
                                             </tr>
                                     </form>');
