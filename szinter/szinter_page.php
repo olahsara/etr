@@ -13,7 +13,7 @@ include_once('../nav/nav_bar.php');
 <head>
     <meta charset="UTF-8">
     <title>Szintér</title>
-    <link rel="stylesheet" href="/etr/style/menu.css"/>
+    <link rel="stylesheet" href="../style/egesz.css"/>
 </head>
 <body>
 <!-- MENU -->
