@@ -3,6 +3,9 @@ session_start();
 if( $_SESSION["felhasznalo"]["role"] === 'hallgato' ){
     header("Location: /etr/role/hallgato/szinter/h_szinter_page.php");
 }
+if( $_SESSION["felhasznalo"]["role"] === 'oktato' ){
+    header("Location: /etr/role/oktato/szinter/o_szinter_page.php");
+}
 include_once('../nav/nav_bar.php');
 ?>
 <!DOCTYPE html>
