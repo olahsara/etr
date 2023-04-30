@@ -1,12 +1,12 @@
 CREATE OR REPLACE FUNCTION count_hallgato_by_felev(my_felev IN NUMBER)
 RETURN NUMBER
 AS
-  book_count NUMBER;
+  book_count NUMBER; -- Mi lesz majd amit visszaadunk
 BEGIN
-  SELECT count(*)
+  SELECT count(*) --count/sum/egy értéket adunk vissza azt még nem tudom hogy kell ha több értékünk van
   INTO book_count
   FROM "Hallgato"
   WHERE FELEV = my_felev;
 
-  RETURN book_count;
+  RETURN book_count; //return ami a táblának az első oszlopában és sorában lesz
 END;

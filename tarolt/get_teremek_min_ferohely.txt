@@ -1,0 +1,13 @@
+CREATE OR REPLACE FUNCTION get_teremek_min_ferohely(my_ferohely IN NUMBER)
+RETURN NUMBER
+AS
+  TYPE table_names IS TABLE OF STRING;
+      termek table_names;
+BEGIN
+  SELECT TEREM_NEV
+  BULK COLLECT INTO termek
+  FROM "Terem"
+  WHERE FEROHELY > my_ferohely;
+
+  RETURN termek;
+END;

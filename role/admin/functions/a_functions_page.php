@@ -19,7 +19,7 @@ session_start();
         <div class="pageContent">
             <div style="margin-top: 100px">
                 <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' ){
-
+                        //Az érték bekérése és továbbküldése egy új oldalra hogy tudjuk használni
                         echo ('
                                     <p>Hallgató szám lekérése félév alapján</p>
                                     <form action="a_function1.php" method="post">
@@ -33,9 +33,25 @@ session_start();
                                             </td>
                                             </tr>
                                     </form>');
+                        //idáig
+                    echo ('
+                                    <p>Termek lekérése lekérése bizonyos férőhely felett</p>
+                                    <form action="a_function2.php" method="post">
+                                        <tr>
+                                            <td>
+                                                <input type="text" name="FEROHELY" id="FEROHELY">
+                                            </td>
+                                            
+                                            <td>
+                                                <input class="submit" type="submit" value="Search Users">
+                                            </td>
+                                            </tr>
+                                    </form>');
 
 
                 } ?>
+
+
 
 
             </div>

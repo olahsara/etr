@@ -21,23 +21,20 @@ session_start();
                 <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
 
                     include_once('../../../functions/functions.php');
-                    //az érték átvétele
-                    $FELEV = $_POST['FELEV'];
+                    $FEROHELY = $_POST['FEROHELY'];
 
-                    //a lekérdezés megalkotás | A FROM dual az azért kell hogy csak egszer adja vissza az eredményt
-                    // count_hallgato_by_felev('.$FELEV.') a függvényhvás + paraméter átadás
-                    // AS "DATA" későbbi hivatkozás miatt elnevezzük
-                    $select = 'SELECT count_hallgato_by_felev('.$FELEV.') AS "DATA" FROM dual';
-                    //simpla lekerdez
+                    $select = 'SELECT get_teremek_min_ferohely('.$FEROHELY.') AS "DATA" FROM dual';
+
                     $params = lekerdez($select);
 
+                    while (($record = oci_fetch_array($params[0], OCI_ASSOC+OCI_RETURN_NULLS)) != false) {
+                        echo ('<p>A termek'.$FEROHELY.'férőhely felett:</p>');
+                        $my_array = $record['DATA'];
+                        foreach ($my_array as $item) {
+                            echo $item;
+                        }
 
 
-
-
-                    while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-                        // ugyanúgy lehet elérni az értékeket mint egy sima select-nél a tarolt gyakorlatilag tényleg egy táblát ad vissza
-                        echo ('<p>A '.$FELEV.'-es hallgatók száma: '.$record["DATA"].'</p>');
                     }
 
 
