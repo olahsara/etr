@@ -17,7 +17,7 @@ session_start();
             <?php include_once('../../../nav/nav_bar.php');?>
         </div>
         <div class="pageContent">
-            <div style="margin-top: 100px">
+            <div>
                 <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' && $_SERVER['REQUEST_METHOD'] === 'POST'){
 
                     include_once('../../../functions/functions.php');
@@ -30,7 +30,7 @@ session_start();
 
 
                     while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-                        echo ('<p>A termek '.$FEROHELY.'-s férőhely felett: '.$record["DATA"].'</p>');
+                        echo ('<h3>A termek '.$FEROHELY.'-s férőhely felett: '.$record["DATA"].'</h3>');
                     }
 
 
