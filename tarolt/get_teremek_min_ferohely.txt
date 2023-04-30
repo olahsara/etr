@@ -1,13 +1,13 @@
 CREATE OR REPLACE FUNCTION get_teremek_min_ferohely(my_ferohely IN NUMBER)
-RETURN NUMBER
+RETURN VARCHAR
 AS
-  TYPE table_names IS TABLE OF STRING;
-      termek table_names;
+  termek_varcar VARCHAR2(1000);
 BEGIN
-  SELECT TEREM_NEV
-  BULK COLLECT INTO termek
+  SELECT listagg(TEREM_NEV, ', ') WITHIN GROUP ( ORDER BY TEREM_NEV)
+  INTO termek_varcar
   FROM "Terem"
   WHERE FEROHELY > my_ferohely;
 
-  RETURN termek;
+  RETURN termek_varcar;
 END;
+/

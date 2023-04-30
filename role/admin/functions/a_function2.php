@@ -27,14 +27,10 @@ session_start();
 
                     $params = lekerdez($select);
 
-                    while (($record = oci_fetch_array($params[0], OCI_ASSOC+OCI_RETURN_NULLS)) != false) {
-                        echo ('<p>A termek'.$FEROHELY.'férőhely felett:</p>');
-                        $my_array = $record['DATA'];
-                        foreach ($my_array as $item) {
-                            echo $item;
-                        }
 
 
+                    while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
+                        echo ('<p>A termek '.$FEROHELY.'-s férőhely felett: '.$record["DATA"].'</p>');
                     }
 
 
