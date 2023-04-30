@@ -1,24 +1,27 @@
-//Értesítés kurzus leadás/felvétel után:
-CREATE OR REPLACE TRIGGER ertesites
-    AFTER INSERT OR DELETE
-    ON "Hallgato_Kurzus"
-    FOR EACH ROW
-    DECLARE
+create or replace trigger ERTESITES
+    before insert or delete
+    on "Hallgato_Kurzus"
+    for each row
+DECLARE
         datum DATE;
         e_uzenet ADATB."Ertesites".UZENET%TYPE;
         kurzus ADATB."Kurzus".KURZUS_NEV%TYPE;
         e_id ADATB."Ertesites".ERTESITES_ID%TYPE;
+        h_id ADATB."Hallgato".HALLGATO_ID%TYPE;
     BEGIN
-        SELECT KURZUS_NEV INTO kurzus FROM "Kurzus" WHERE KURZUS_ID = :NEW."hk_Kurzus_id";
+
         datum := CURRENT_DATE;
         IF INSERTING THEN
+            SELECT KURZUS_NEV INTO kurzus FROM "Kurzus" WHERE KURZUS_ID = :NEW."hk_Kurzus_id";
             e_uzenet := CONCAT('Sikeresen felvetted az alábbi kurzust: ', kurzus);
+            h_id := :NEW."hk_Hallgato_id";
         ELSIF DELETING THEN
+            SELECT KURZUS_NEV INTO kurzus FROM "Kurzus" WHERE KURZUS_ID = :OLD."hk_Kurzus_id";
             e_uzenet := CONCAT('Sikeresen leadtad az alábbi kurzust: ', kurzus);
+            h_id := :OLD."hk_Hallgato_id";
         END IF;
         INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES ( datum, e_uzenet);
         SELECT ERTESITES_ID INTO e_id FROM "Ertesites" WHERE UZENET = e_uzenet AND ERTESITES_IDOPONT = datum;
-        INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (:NEW."hk_Hallgato_id", e_id);
+        INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (h_id, e_id);
     END;
-
-ALTER TRIGGER ertesites ENABLE;
+ALTER TRIGGER ERTESITES ENABLE;
