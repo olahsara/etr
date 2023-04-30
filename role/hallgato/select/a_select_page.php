@@ -1,17 +1,15 @@
 <?php
 session_start();
+include_once('../../../functions/functions.php');
 ?>
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lekérdezések</title>
-    <link rel="stylesheet" href="../../../style/index.css"/>
-    <link rel="stylesheet" href="../../../style/menu.css"/>
-
+    <title>Kurzusaim</title>
+    <link rel="stylesheet" href="../../../style/egesz.css"/>
 </head>
 <body>
-<!-- MENU -->
 <div class="page">
     <div class="pageHeader">
         <img src="../../../style/kep.jpg" alt="Neptunusz" width="950" height="300">
@@ -82,7 +80,9 @@ session_start();
     </div>
 
 </div>
-
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
