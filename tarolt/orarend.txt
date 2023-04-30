@@ -1,0 +1,35 @@
+create FUNCTION orarend_fun(selected_nap IN ADATB."Ora".NAP%TYPE, selected_ora IN ADATB."Ora".ORA%TYPE, selected_hallgato IN ADATB."Hallgato".HALLGATO_ID%TYPE)
+RETURN VARCHAR2
+IS
+    visszaad VARCHAR2(500);
+    v_kurzusnev ADATB."Kurzus".KURZUS_NEV%TYPE;
+    v_kurzuskod ADATB."Kurzus".KURZUS_KOD%TYPE;
+    v_oraszam ADATB."Kurzus".ORASZAM%TYPE;
+    v_oktato ADATB."Oktato".OKTATO_NEV%TYPE;
+    v_epulet ADATB."Terem".EPULET%TYPE;
+    v_terem ADATB."Terem".TEREM_NEV%TYPE;
+
+BEGIN
+    visszaad := '';
+    SELECT ADATB."Kurzus".KURZUS_NEV, ADATB."Kurzus".KURZUS_KOD, ADATB."Kurzus".ORASZAM,
+           ADATB."Oktato".OKTATO_NEV,
+           ADATB."Terem".EPULET, ADATB."Terem".TEREM_NEV
+    INTO v_kurzusnev, v_kurzuskod, v_oraszam, v_oktato, v_epulet, v_terem
+    FROM ADATB."Kurzus", ADATB."Oktato", ADATB."Ora", ADATB."Terem", ADATB."Hallgato",
+         ADATB."Kuzus_Ora", ADATB."Hallgato_Ora", ADATB."Oktato_Ora", ADATB."Kuzus_Terem"
+    WHERE ADATB."Kurzus".KURZUS_ID = ADATB."Kuzus_Terem"."kt_Kurzus_id" AND ADATB."Kuzus_Terem"."kt_Terem_id" = ADATB."Terem".TEREM_ID
+      AND ADATB."Hallgato".HALLGATO_ID = ADATB."Hallgato_Ora"."ho_Hallgato_id" AND ADATB."Hallgato_Ora"."ho_Ora_id" = ADATB."Ora".ORA_ID
+      AND ADATB."Oktato".OKTATO_ID = ADATB."Oktato_Ora"."oo_Oktato_id" AND ADATB."Ora".ORA_ID = ADATB."Oktato_Ora"."oo_Ora_id"
+      AND ADATB."Kurzus".KURZUS_ID = ADATB."Kuzus_Ora"."ko_Kurzus_id" AND ADATB."Kuzus_Ora"."ko_Ora_id" = ADATB."Ora".ORA_ID
+      AND ADATB."Hallgato".HALLGATO_ID = selected_hallgato
+      AND ADATB."Ora".ORA = selected_ora AND ADATB."Ora".NAP = selected_nap;
+    visszaad := (v_kurzuskod || '/' || v_kurzusnev || '/' ||  v_oktato || '/' || v_epulet || '/' || v_terem || '/' || v_oraszam );
+
+    RETURN visszaad;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        visszaad := 'Nincs óra';
+        return visszaad;
+end;
+/
+
