@@ -906,3 +906,209 @@ INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (23, 17);
 INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (24, 13);
 
 COMMIT;
+
+CREATE OR REPLACE TRIGGER TEREM_GEPSZAM
+    before update
+    on "Terem"
+    for each row
+BEGIN
+        if :NEW."GEPEK_SZAMA">:NEW."FEROHELY" THEN
+            :NEW."GEPEK_SZAMA":=:NEW."FEROHELY";
+        end if;
+    END;
+
+ALTER TRIGGER TEREM_GEPSZAM ENABLE;
+
+CREATE OR REPLACE TRIGGER HALLGATO_SZAK_VALT
+    before insert
+    on "Hallgato_Szak"
+    for each row
+DECLARE
+    l_count NUMBER;
+BEGIN
+    SELECT NVL(COUNT(*), 0) INTO l_count FROM "Hallgato_Szak" WHERE "hs_Hallgato_id"=:NEW."hs_Hallgato_id";
+    IF l_count != 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Nem engedelyezett tobb mint egy szakon lennie a hallgatonak');
+    END IF;
+END;
+
+ALTER TRIGGER HALLGATO_SZAK_VALT ENABLE;
+
+CREATE OR REPLACE TRIGGER HALLGATO_SZAK_KURZUS
+    after update
+    on "Hallgato_Szak"
+    for each row
+BEGIN
+    DELETE "Hallgato_Kurzus" WHERE "hk_Hallgato_id"=:NEW."hs_Hallgato_id";
+END;
+
+ALTER TRIGGER HALLGATO_SZAK_KURZUS ENABLE;
+
+CREATE OR REPLACE TRIGGER HALLGATO_DIPLOMA_KREDIT
+    before insert
+    on "Hallgato_Diploma"
+    for each row
+DECLARE
+    my_kredit NUMBER;
+BEGIN
+    SELECT SUM(KREDIT) INTO my_kredit FROM "Hallgato_Kurzus","Kurzus" WHERE "hk_Hallgato_id"=:NEW."hd_Hallgato_id" AND "hk_Kurzus_id" = KURZUS_ID;
+    UPDATE "Diploma" SET KREDIT=my_kredit WHERE DIPLOMA_ID=:NEW."hd_Diploma_id";
+END;
+
+ALTER TRIGGER HALLGATO_DIPLOMA_KREDIT ENABLE;
+
+CREATE OR REPLACE TRIGGER ERTESITES2
+    after insert
+    on "Kuzus_Forum"
+    for each row
+DECLARE
+    My_Eretsites_id ADATB."Ertesites".ERTESITES_ID%TYPE;
+    My_Forum_id ADATB."Forum".UZENET_ID%TYPE;
+    my_UZENET_IDOPONT ADATB."Forum".UZENET_IDOPONT%TYPE;
+    my_UZENET ADATB."Forum".UZENET%TYPE;
+    TYPE my_table_type IS TABLE OF ADATB."Hallgato".HALLGATO_ID%TYPE;
+    my_data my_table_type;
+    BEGIN
+        SELECT UZENET_ID , UZENET , UZENET_IDOPONT INTO My_Forum_id,my_UZENET,my_UZENET_IDOPONT FROM "Forum" WHERE UZENET_ID  = :NEW."kf_Forum_id";
+        INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (my_UZENET_IDOPONT,my_UZENET);
+        SELECT max(ERTESITES_ID) INTO My_Eretsites_id FROM "Ertesites";
+        SELECT "hk_Hallgato_id" BULK COLLECT INTO my_data FROM "Hallgato_Kurzus" WHERE "hk_Kurzus_id" = :NEW."kf_Kurzus_id";
+        FORALL  i in  my_data.FIRST..my_data.LAST INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (my_data(i),My_Eretsites_id);
+    END;
+
+ALTER TRIGGER ERTESITES2 ENABLE;
+
+create or replace trigger ERTESITES
+    before insert or delete
+    on "Hallgato_Kurzus"
+    for each row
+DECLARE
+        datum DATE;
+        e_uzenet ADATB."Ertesites".UZENET%TYPE;
+        kurzus ADATB."Kurzus".KURZUS_NEV%TYPE;
+        e_id ADATB."Ertesites".ERTESITES_ID%TYPE;
+        h_id ADATB."Hallgato".HALLGATO_ID%TYPE;
+    BEGIN
+
+        datum := CURRENT_DATE;
+        IF INSERTING THEN
+            SELECT KURZUS_NEV INTO kurzus FROM "Kurzus" WHERE KURZUS_ID = :NEW."hk_Kurzus_id";
+            e_uzenet := CONCAT('Sikeresen felvetted az alábbi kurzust: ', kurzus);
+            h_id := :NEW."hk_Hallgato_id";
+        ELSIF DELETING THEN
+            SELECT KURZUS_NEV INTO kurzus FROM "Kurzus" WHERE KURZUS_ID = :OLD."hk_Kurzus_id";
+            e_uzenet := CONCAT('Sikeresen leadtad az alábbi kurzust: ', kurzus);
+            h_id := :OLD."hk_Hallgato_id";
+        END IF;
+        INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES ( datum, e_uzenet);
+        SELECT ERTESITES_ID INTO e_id FROM "Ertesites" WHERE UZENET = e_uzenet AND ERTESITES_IDOPONT = datum;
+        INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (h_id, e_id);
+    END;
+ALTER TRIGGER ERTESITES ENABLE;
+
+COMMIT;
+
+create FUNCTION orarend_fun(selected_nap IN ADATB."Ora".NAP%TYPE, selected_ora IN ADATB."Ora".ORA%TYPE, selected_hallgato IN ADATB."Hallgato".HALLGATO_ID%TYPE)
+RETURN VARCHAR2
+IS
+    visszaad VARCHAR2(501);
+    v_kurzusnev ADATB."Kurzus".KURZUS_NEV%TYPE;
+    v_kurzuskod ADATB."Kurzus".KURZUS_KOD%TYPE;
+    v_oraszam ADATB."Kurzus".ORASZAM%TYPE;
+    v_oktato ADATB."Oktato".OKTATO_NEV%TYPE;
+    v_epulet ADATB."Terem".EPULET%TYPE;
+    v_terem ADATB."Terem".TEREM_NEV%TYPE;
+
+BEGIN
+    visszaad := '';
+    SELECT ADATB."Kurzus".KURZUS_NEV, ADATB."Kurzus".KURZUS_KOD, ADATB."Kurzus".ORASZAM,
+           ADATB."Oktato".OKTATO_NEV,
+           ADATB."Terem".EPULET, ADATB."Terem".TEREM_NEV
+    INTO v_kurzusnev, v_kurzuskod, v_oraszam, v_oktato, v_epulet, v_terem
+    FROM ADATB."Kurzus", ADATB."Oktato", ADATB."Ora", ADATB."Terem", ADATB."Hallgato",
+         ADATB."Kuzus_Ora", ADATB."Hallgato_Ora", ADATB."Oktato_Ora", ADATB."Kuzus_Terem"
+    WHERE ADATB."Kurzus".KURZUS_ID = ADATB."Kuzus_Terem"."kt_Kurzus_id" AND ADATB."Kuzus_Terem"."kt_Terem_id" = ADATB."Terem".TEREM_ID
+      AND ADATB."Hallgato".HALLGATO_ID = ADATB."Hallgato_Ora"."ho_Hallgato_id" AND ADATB."Hallgato_Ora"."ho_Ora_id" = ADATB."Ora".ORA_ID
+      AND ADATB."Oktato".OKTATO_ID = ADATB."Oktato_Ora"."oo_Oktato_id" AND ADATB."Ora".ORA_ID = ADATB."Oktato_Ora"."oo_Ora_id"
+      AND ADATB."Kurzus".KURZUS_ID = ADATB."Kuzus_Ora"."ko_Kurzus_id" AND ADATB."Kuzus_Ora"."ko_Ora_id" = ADATB."Ora".ORA_ID
+      AND ADATB."Hallgato".HALLGATO_ID = selected_hallgato
+      AND ADATB."Ora".ORA = selected_ora AND ADATB."Ora".NAP = selected_nap;
+    visszaad := (v_kurzuskod || '/' || v_kurzusnev || '/' ||  v_oktato || '/' || v_epulet || '/' || v_terem || '/' || v_oraszam );
+
+    RETURN visszaad;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        visszaad := 'Nincs óra';
+        return visszaad;
+end;
+
+
+CREATE OR REPLACE FUNCTION get_teremek_min_ferohely(my_ferohely IN NUMBER)
+RETURN VARCHAR
+AS
+  termek_varcar VARCHAR2(1000);
+BEGIN
+  SELECT listagg(TEREM_NEV, ', ') WITHIN GROUP ( ORDER BY TEREM_NEV)
+  INTO termek_varcar
+  FROM "Terem"
+  WHERE FEROHELY > my_ferohely;
+
+  RETURN termek_varcar;
+END;
+
+
+CREATE OR REPLACE FUNCTION get_kurzus_by_felev(my_felev IN NUMBER)
+RETURN VARCHAR
+AS
+  kurzus_varcar VARCHAR2(1000);
+BEGIN
+  SELECT listagg(KURZUS_NEV, ', ') WITHIN GROUP ( ORDER BY KURZUS_NEV)
+  INTO kurzus_varcar
+  FROM "Kurzus"
+  WHERE "Kurzus".AJANLOTT_FELEV > my_felev;
+
+  RETURN kurzus_varcar;
+END;
+
+
+CREATE OR REPLACE FUNCTION get_diploma_count_by_ev_zv(my_ev IN NUMBER,my_zv IN NUMBER)
+RETURN NUMBER
+AS
+  diploma_count NUMBER;
+BEGIN
+  SELECT count(*)
+  INTO diploma_count
+  FROM "Diploma"
+  WHERE VEGZES_EVE=my_ev AND ZV_JEGY = my_zv;
+
+  RETURN diploma_count;
+END;
+
+
+CREATE OR REPLACE FUNCTION count_hallgato_by_kurzus(my_kurzus IN NUMBER)
+RETURN NUMBER
+AS
+  hallgato_count NUMBER; -- Mi lesz majd amit visszaadunk
+BEGIN
+  SELECT count(*) --count/sum/egy értéket adunk vissza
+  INTO hallgato_count
+  FROM "Hallgato_Kurzus"
+  WHERE "hk_Kurzus_id" = my_kurzus;
+
+  RETURN hallgato_count;
+END;
+
+CREATE OR REPLACE FUNCTION count_hallgato_by_felev(my_felev IN NUMBER)
+RETURN NUMBER
+AS
+  book_count NUMBER; -- Mi lesz majd amit visszaadunk
+BEGIN
+  SELECT count(*) --count/sum/egy értéket adunk vissza azt még nem tudom hogy kell ha több értékünk van
+  INTO book_count
+  FROM "Hallgato"
+  WHERE FELEV = my_felev;
+
+  RETURN book_count;
+END;
+
+COMMIT;
