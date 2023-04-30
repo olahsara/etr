@@ -142,20 +142,6 @@ switch ($selected){
 
         close($params[0], $params[1]);
         break;
-    case 'admin' :
-        $select = 'SELECT * FROM "Admin"';
-
-        $params = lekerdez($select);
-
-        echo '<table> <tr> <th>ID</th> <th>Jelszó</th> </tr>';
-        while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-            echo sprintf('<tr><td>%d</td><td>%s</td></tr>', $record['ADMIN_ID'], $record['JELSZO']);
-        }
-
-        echo '</table> <div> <a class="link" href="a_select_page.php">Vissza</a> </div>';
-
-        close($params[0], $params[1]);
-        break;
 
     case 'mennyi_tanar' :
         $select = 'SELECT "Kar".KAR_NEV AS "Kar nev", COUNT("Oktato".OKTATO_ID) AS "Tanarok szama"

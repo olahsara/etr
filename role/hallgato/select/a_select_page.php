@@ -12,25 +12,14 @@ session_start();
 </head>
 <body>
 <!-- MENU -->
-<div class="menu">
-    <ul>
-        <li><a  href="../../../szinter/szinter_page.php">Kezdőlap</a></li>
-        <?php if(isset($_SESSION["felhasznalo"]) ){ ?>
-            <li><a href="../../../be_kijelentkezes/kijelentkezes.php">Kijelentkezés</a></li>
-        <?php } else { ?>
-            <li><a href="../../../be_kijelentkezes/belepes_page.php">Bejelentkezés</a></li>
-        <?php }?>
-        <?php if(isset($_SESSION["felhasznalo"]) && $_SESSION["felhasznalo"]["role"] === 'admin' ){ ?>
-            <li><a  href="../felhasznalok/a_felhasznalok_page.php">Felhasználók</a></li>
-            <li><a  href="../kurzusok/a_kurzus_page.php">Kurzusok</a></li>
-            <li><a  href="../orarend/a_orarend_page.php">Órarend</a></li>
-            <li><a class="active" href="a_select_page.php">Lekérdezések</a></li>
-        <?php } ?>
-    </ul>
-</div>
-
-<!-- LEKERDEZEZSEK -->
-<div>
+<div class="page">
+    <div class="pageHeader">
+        <img src="../../../style/kep.jpg" alt="Neptunusz" width="950" height="300">
+        <div>
+            <?php include_once('../../../nav/nav_bar.php');?>
+        </div>
+        <div class="pageContent">
+<div class="adatok">
     <div class="text" >Diplomák száma szakokra lebontva
         <form action="select.php" method="POST">
             <input type="hidden" name="table" value="szak_diploma"><br>
@@ -70,12 +59,6 @@ session_start();
     <div class="text" >Diákok keddi óráinak száma
         <form action="select.php" method="POST">
             <input type="hidden" name="table" value="kedd_darabszam"><br>
-            <input class="button" type="submit" value="Lekérdez">
-        </form>
-    </div>
-    <div class="text" >Admin tábla tartalma
-        <form action="select.php" method="POST">
-            <input type="hidden" name="table" value="admin"><br>
             <input class="button" type="submit" value="Lekérdez">
         </form>
     </div>

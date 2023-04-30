@@ -74,16 +74,36 @@ if (isset($_GET['value'])) {
     }
 
     if (!$ures){
+        $elso_tabla = explode("_",$oszlopnevek[1]);
+        $elso_tabla_select = 'SELECT * FROM "'.$elso_tabla[1].'"';
+        $elso_tabla_params = lekerdez($elso_tabla_select);
+        $elso_tabla_oszlopnevek = array_keys(oci_fetch_array($elso_tabla_params[0]));
+
+        $masodik_tabla = explode("_",$oszlopnevek[3]);
+        $masodik_tabla_select = 'SELECT * FROM "'.$masodik_tabla[1].'"';
+        $masodik_tabla_params = lekerdez($masodik_tabla_select);
+        $masodik_tabla_oszlopnevek = array_keys(oci_fetch_array($masodik_tabla_params[0]));
+
+
         echo '<table> <tr> <th> </th><th>'.$oszlopnevek[1].' </th> <th>'.$oszlopnevek[3].'</th>  <th>'.$tabla.' Adatainak módositasa</th> </tr>';
 
         printf('<form action="a_kapcsolat_add.php?tabla='.$tabla.'&elso_oszlop='.$oszlopnevek[1].'&masodik_oszlop='.$oszlopnevek[3].'" method="post">
                                         <tr>
                                             <td>Új '.$tabla.'</td>
                                             <td>
-                                                <input type="text" name="elso" id="elso" >
+                                                <select name="elso" id="elso">');
+        while ($record = oci_fetch_array($elso_tabla_params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
+                             printf('<option value="'.$record[$elso_tabla_oszlopnevek[1]].'">'.$record[$elso_tabla_oszlopnevek[1]].'</option>');
+        }
+                             printf('</select>
+                                                
                                             </td>
                                             <td>
-                                                <input type="text" name="masodik" id="masodik" >
+                                                <select name="masodik" id="masodik">');
+        while ($record = oci_fetch_array($masodik_tabla_params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
+            printf('<option value="'.$record[$masodik_tabla_oszlopnevek[1]].'">'.$record[$masodik_tabla_oszlopnevek[1]].'</option>');
+        }
+        printf('</select>
                                             </td>
                                             
                                             <td>
@@ -91,7 +111,7 @@ if (isset($_GET['value'])) {
                                             </td>
                                             </tr>
                                     </form>');
-
+        $params = lekerdez($select);
         while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
             echo sprintf('<tr><td></td><td>%s</td><td>%s</td><td><a 
                                 href="a_mod_del_kapcsolat.php?tabla=' . urlencode($tabla) .

@@ -79,6 +79,8 @@ include_once('../../../functions/functions.php');
     echo sprintf('<div><b>Súlyozott átlag:</b> %01.3f</div>', $s_eredmeny);
     close($params[0], $params[1]);
     ?>
+
+
     
 </div>
         </div>
