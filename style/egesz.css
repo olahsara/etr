@@ -7,7 +7,7 @@ BODY {
 
 .page{
     display: block;
-    width: 1000px;
+    width: 80%;
     min-height: 800px;
     overflow: auto;
     margin: 0px auto 0px auto;
