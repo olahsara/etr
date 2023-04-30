@@ -41,7 +41,7 @@ include_once('../../../functions/functions.php');
 
     $select = 'SELECT ADATB."Szak".SZAK_NEV, ADATB."Szak".SZAK_KOD,
                ADATB."Kar".KAR_KOD, ADATB."Kar".KAR_NEV,
-               ADATB."Oktato".OKTATO_NEV,
+               ADATB."Oktato".OKTATO_NEV, ADATB."Oktato".NEPTUN_KOD,
                ADATB."Ora".ORA, ADATB."Ora".NAP,
                ADATB."Terem".TEREM_NEV, ADATB."Terem".EPULET, ADATB."Kurzus".KURZUS_KOD, ADATB."Hallgato".NEPTUN_KOD
                FROM ADATB."Hallgato", ADATB."Kurzus", ADATB."Szak", ADATB."Kar", ADATB."Oktato", ADATB."Ora", ADATB."Terem",
@@ -60,11 +60,11 @@ include_once('../../../functions/functions.php');
             echo sprintf('<div><b>Kurzus kódja:</b> %s</div>
                                  <div><b>Szak:</b> %s (%s)</div>
                                  <div><b>Kar:</b> %s (%s)</div>
-                                 <div><b>Felelős oktató:</b> %s </div>
+                                 <div><b>Felelős oktató:</b> %s (%s)</div>
                                  <div><b>Helyszín:</b></b> %s, %s </div>
                                  <div><b>Időpont:</b></b> %s, %d óra</div><br>',
                 $record['KURZUS_KOD'], $record['SZAK_NEV'], $record['SZAK_KOD'], $record['KAR_NEV'],
-                $record['KAR_KOD'], $record['OKTATO_NEV'], $record['EPULET'], $record['TEREM_NEV'],
+                $record['KAR_KOD'], $record['OKTATO_NEV'], $record['NEPTUN_KOD'],$record['EPULET'], $record['TEREM_NEV'],
                 getday($record['NAP']), $record['ORA']);
         }
     }
