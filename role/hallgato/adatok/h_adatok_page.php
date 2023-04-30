@@ -48,7 +48,12 @@ include_once('../../../functions/functions.php');
               AND ADATB."Hallgato".HALLGATO_ID LIKE ' .$_SESSION["felhasznalo"]["id"];
     $params = lekerdez($atlag);
     while ($record = oci_fetch_array($params[0], OCI_ASSOC + OCI_RETURN_NULLS)) {
-        $eredmeny = (float) $record['jegy']/$record['db'];
+        if ($record['db']!=0){
+            $eredmeny = (float) $record['jegy']/$record['db'];
+        }else{
+            $eredmeny = 0.0;
+        }
+
         echo sprintf('<div><b>Átlag:</b> %01.3f</div>', $eredmeny);
     }
     close($params[0], $params[1]);

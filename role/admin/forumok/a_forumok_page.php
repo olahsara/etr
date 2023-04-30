@@ -59,7 +59,7 @@ session_start();
 
     echo '<table> <tr> <th>Fórum ID</th> <th>Fórum Idopont</th> <th>Fórum UZENET</th> <th>Fórum Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_forumok_add.php" method="post">
+    echo ('<form action="a_forumok_add.php" method="post">
                                         <tr>
                                             <td>Új Fórum</td>
                                             <td>

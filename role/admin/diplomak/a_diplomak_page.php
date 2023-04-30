@@ -28,7 +28,7 @@ session_start();
 
     echo '<table> <tr> <th>Diploma ID</th> <th>Diploma Zv Jegy</th> <th>Diploma Vegzes Eve</th> <th>Diploma Kredit</th> <th>Diploma Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_diplomak_add.php" method="post">
+    echo ('<form action="a_diplomak_add.php" method="post">
                                         <tr>
                                             <td>Új Diploma</td>
                                             <td>

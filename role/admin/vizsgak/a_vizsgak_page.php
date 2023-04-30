@@ -60,7 +60,7 @@ session_start();
 
     echo '<table> <tr> <th>Vizsga ID</th> <th>Vizsga Idopont</th>  <th>Vizsga Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_vizsgak_add.php" method="post">
+    echo ('<form action="a_vizsgak_add.php" method="post">
                                         <tr>
                                             <td>Új Vizsga</td>
                                             <td>

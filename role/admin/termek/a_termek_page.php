@@ -60,7 +60,7 @@ session_start();
 
     echo '<table> <tr> <th>Terem ID</th> <th>Terem nev</th> <th>Terem epulet</th> <th>Terem ferohely</th> <th>Terem gepek szama</th>  <th>Terem Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_termek_add.php" method="post">
+    echo ('<form action="a_termek_add.php" method="post">
                                         <tr>
                                             <td>Új Terem</td>
                                             <td>

@@ -59,7 +59,7 @@ session_start();
 
     echo '<table> <tr> <th>Ertesites ID</th> <th>Ertesites Idopont</th> <th>Ertesites UZENET</th> <th>Ertesites Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_ertesitesek_add.php" method="post">
+    echo ('<form action="a_ertesitesek_add.php" method="post">
                                         <tr>
                                             <td>Új Ertesites</td>
                                             <td>

@@ -60,7 +60,7 @@ session_start();
 
     echo '<table> <tr> <th>Kurzus ID</th> <th>Kurzus kod</th> <th>Kurzus nev</th> <th>Kurzus ajanlott felev</th> <th>Kurzus kredit</th> <th>Kurzus oraszam</th> <th>Kurzus megnyitva</th><th>Kurzus Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_kurzusok_add.php" method="post">
+    echo ('<form action="a_kurzusok_add.php" method="post">
                                         <tr>
                                             <td>Új Kurzus</td>
                                             <td>

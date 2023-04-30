@@ -60,7 +60,7 @@ session_start();
 
     echo '<table> <tr> <th>Oktato ID</th> <th>Oktato nev</th> <th>Oktato jelszo</th> <th>Oktato beosztas</th> <th>Oktato neptun kod</th>  <th>Oktato Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_oktatok_add.php" method="post">
+    echo ('<form action="a_oktatok_add.php" method="post">
                                         <tr>
                                             <td>Új Oktato</td>
                                             <td>

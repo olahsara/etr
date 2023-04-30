@@ -60,7 +60,7 @@ session_start();
 
     echo '<table> <tr> <th>Szak ID</th> <th>Szak nev</th> <th>Szak kod</th>  <th>Szak Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_szakok_add.php" method="post">
+    echo ('<form action="a_szakok_add.php" method="post">
                                         <tr>
                                             <td>Új Szak</td>
                                             <td>

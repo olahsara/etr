@@ -60,7 +60,7 @@ session_start();
 
     echo '<table> <tr> <th>Kar ID</th> <th>Kar nev</th> <th>Kar kod</th>  <th>Kar Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_karok_add.php" method="post">
+    echo ('<form action="a_karok_add.php" method="post">
                                         <tr>
                                             <td>Új Kar</td>
                                             <td>

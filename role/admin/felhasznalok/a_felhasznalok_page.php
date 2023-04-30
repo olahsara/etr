@@ -61,7 +61,7 @@ FROM "Hallgato"';
 
     echo '<table> <tr> <th>Hallgato ID</th> <th>Hallgato Nev</th> <th>Hallgato Jelszo</th> <th>Hallgato Felev</th> <th>Hallgato Neptun-kod</th> <th>Hallgato Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_felhasznalo_add.php" method="post">
+    echo ('<form action="a_felhasznalo_add.php" method="post">
                                         <tr>
                                             <td>Új Felhasználó</td>
                                             <td>

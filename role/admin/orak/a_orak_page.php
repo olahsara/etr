@@ -60,7 +60,7 @@ session_start();
 
     echo '<table> <tr> <th>Ora ID</th> <th>Ora NAP</th> <th>Ora ORA</th> <th>Ora Adatainak módositasa</th> </tr>';
 
-    echo printf('<form action="a_orak_add.php" method="post">
+    echo ('<form action="a_orak_add.php" method="post">
                                         <tr>
                                             <td>Új Ora</td>
                                             <td>
