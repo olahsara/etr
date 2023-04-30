@@ -1,0 +1,12 @@
+CREATE OR REPLACE FUNCTION count_hallgato_by_felev(my_felev IN NUMBER)
+RETURN NUMBER
+AS
+  book_count NUMBER;
+BEGIN
+  SELECT count(*)
+  INTO book_count
+  FROM "Hallgato"
+  WHERE FELEV = my_felev;
+
+  RETURN book_count;
+END;
