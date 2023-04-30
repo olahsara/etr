@@ -1,0 +1,913 @@
+create table "Forum"
+(
+    UZENET_ID      NUMBER generated as identity
+        constraint "Forum_pk"
+            primary key,
+    UZENET         VARCHAR2(100),
+    UZENET_IDOPONT DATE
+)
+/
+
+create table "Kurzus"
+(
+    KURZUS_ID      NUMBER generated as identity
+        constraint "Kurzus_pk"
+            primary key,
+    KURZUS_KOD     VARCHAR2(100),
+    KURZUS_NEV     VARCHAR2(100),
+    AJANLOTT_FELEV NUMBER,
+    KREDIT         NUMBER,
+    ORASZAM        NUMBER,
+    MEGNYITVA      NUMBER(1)
+)
+/
+
+create table "Vizsga"
+(
+    VIZSGA_ID      NUMBER generated as identity
+        constraint "Vizsga_pk"
+            primary key,
+    VIZSGA_IDOPONT DATE
+)
+/
+
+create table "Terem"
+(
+    TEREM_ID    NUMBER generated as identity
+        constraint "Terem_pk"
+            primary key,
+    TEREM_NEV   VARCHAR2(100),
+    EPULET      VARCHAR2(100),
+    FEROHELY    NUMBER,
+    GEPEK_SZAMA NUMBER
+)
+/
+
+create table "Hallgato"
+(
+    HALLGATO_ID  NUMBER generated as identity
+        constraint "Hallgato_pk"
+            primary key,
+    HALLGATO_NEV VARCHAR2(100),
+    JELSZO       VARCHAR2(100),
+    FELEV        NUMBER,
+    NEPTUN_KOD   VARCHAR2(100)
+)
+/
+
+create table "Ertesites"
+(
+    ERTESITES_ID      NUMBER generated as identity
+        constraint "Ertesites_pk"
+            primary key,
+    ERTESITES_IDOPONT DATE,
+    UZENET            VARCHAR2(100)
+)
+/
+
+create table "Diploma"
+(
+    DIPLOMA_ID NUMBER generated as identity
+        constraint "Diploma_pk"
+            primary key,
+    ZV_JEGY    NUMBER,
+    VEGZES_EVE NUMBER,
+    KREDIT     NUMBER
+)
+/
+
+create table "Oktato"
+(
+    OKTATO_ID  NUMBER generated as identity
+        constraint "Oktato_pk"
+            primary key,
+    OKTATO_NEV VARCHAR2(100),
+    JELSZO     VARCHAR2(100),
+    BEOSZTAS   VARCHAR2(100),
+    NEPTUN_KOD VARCHAR2(100)
+)
+/
+
+create table "Kar"
+(
+    KAR_ID  NUMBER generated as identity
+        constraint "Kar_pk"
+            primary key,
+    KAR_NEV VARCHAR2(100),
+    KAR_KOD VARCHAR2(100)
+)
+/
+
+create table "Szak"
+(
+    SZAK_ID  NUMBER generated as identity
+        constraint "Szak_pk"
+            primary key,
+    SZAK_NEV VARCHAR2(100),
+    SZAK_KOD VARCHAR2(100)
+)
+/
+
+create table "Ora"
+(
+    ORA_ID NUMBER generated as identity
+        constraint "Ora_pk"
+            primary key,
+    NAP    NUMBER,
+    ORA    NUMBER
+)
+/
+
+create table "Admin"
+(
+    ADMIN_ID NUMBER generated as identity
+        constraint "Admin_pk"
+            primary key,
+    JELSZO   VARCHAR2(100)
+)
+/
+
+create table "Kuzus_Forum"
+(
+    "kf_Kurzus_id" NUMBER not null
+        constraint "Kuzus_Forum_Kurzus_fk"
+            references "Kurzus"
+                on delete cascade,
+    "kf_Forum_id"  NUMBER not null
+        constraint "Kuzus_Forum_Forum_fk"
+            references "Forum"
+                on delete cascade
+)
+/
+
+create table "Kuzus_Vizsga"
+(
+    "kv_Kurzus_id" NUMBER not null
+        constraint "Kuzus_Vizsga_Kurzus_fk"
+            references "Kurzus"
+                on delete cascade,
+    "kv_Vizsga_id" NUMBER not null
+        constraint "Kuzus_Vizsga_Vizsga_fk"
+            references "Vizsga"
+                on delete cascade
+)
+/
+
+create table "Kuzus_Terem"
+(
+    "kt_Kurzus_id" NUMBER not null
+        constraint "Kuzus_Terem_Kurzus_fk"
+            references "Kurzus"
+                on delete cascade,
+    "kt_Terem_id"  NUMBER not null
+        constraint "Kuzus_Terem_Terem_fk"
+            references "Terem"
+                on delete cascade
+)
+/
+
+create table "Kuzus_Szak"
+(
+    "ks_Kurzus_id" NUMBER not null
+        constraint "Kuzus_Szak_Kurzus_fk"
+            references "Kurzus"
+                on delete cascade,
+    "ks_Szak_id"   NUMBER not null
+        constraint "Kuzus_Szak_Szak_fk"
+            references "Szak"
+                on delete cascade
+)
+/
+
+create table "Kuzus_Oktato"
+(
+    "ko_Kurzus_id" NUMBER not null
+        constraint "Kuzus_Oktato_Kurzus_fk"
+            references "Kurzus"
+                on delete cascade,
+    "ko_Oktato_id" NUMBER not null
+        constraint "Kuzus_Oktato_Oktato_fk"
+            references "Oktato"
+                on delete cascade
+)
+/
+
+create table "Kuzus_Ora"
+(
+    "ko_Kurzus_id" NUMBER not null
+        constraint "Kuzus_Ora_Kurzus_fk"
+            references "Kurzus"
+                on delete cascade,
+    "ko_Ora_id"    NUMBER not null
+        constraint "Kuzus_Ora_Ora_fk"
+            references "Ora"
+                on delete cascade
+)
+/
+
+create table "Oktato_Forum"
+(
+    "of_Oktato_id" NUMBER not null
+        constraint "Oktato_Forum_Oktato_fk"
+            references "Oktato"
+                on delete cascade,
+    "of_Forum_id"  NUMBER not null
+        constraint "Oktato_Forum_Forum_fk"
+            references "Forum"
+                on delete cascade
+)
+/
+
+create table "Oktato_Kar"
+(
+    "ok_Oktato_id" NUMBER not null
+        constraint "Oktato_Kar_Oktato_fk"
+            references "Oktato"
+                on delete cascade,
+    "ok_Kar_id"    NUMBER not null
+        constraint "Oktato_Kar_Kar_fk"
+            references "Kar"
+                on delete cascade
+)
+/
+
+create table "Oktato_Ora"
+(
+    "oo_Oktato_id" NUMBER not null
+        constraint "Oktato_Ora_Oktato_fk"
+            references "Oktato"
+                on delete cascade,
+    "oo_Ora_id"    NUMBER not null
+        constraint "Oktato_Ora_Ora_fk"
+            references "Ora"
+                on delete cascade
+)
+/
+
+create table "Hallgato_Ora"
+(
+    "ho_Hallgato_id" NUMBER not null
+        constraint "Hallgato_Ora_Hallgato_fk"
+            references "Hallgato"
+                on delete cascade,
+    "ho_Ora_id"      NUMBER not null
+        constraint "Hallgato_Ora_Ora_fk"
+            references "Ora"
+                on delete cascade
+)
+/
+
+create table "Hallgato_Szak"
+(
+    "hs_Hallgato_id" NUMBER not null
+        constraint "Hallgato_Szak_Hallgato_fk"
+            references "Hallgato"
+                on delete cascade,
+    "hs_Szak_id"     NUMBER not null
+        constraint "Hallgato_Szak_Szak_fk"
+            references "Szak"
+                on delete cascade
+)
+/
+
+create table "Hallgato_Diploma"
+(
+    "hd_Hallgato_id" NUMBER not null
+        constraint "Hallgato_Diploma_Hallgato_fk"
+            references "Hallgato"
+                on delete cascade,
+    "hd_Diploma_id"  NUMBER not null
+        constraint "Hallgato_Diploma_Diploma_fk"
+            references "Diploma"
+                on delete cascade
+)
+/
+
+create table "Hallgato_Ertesites"
+(
+    "he_Hallgato_id"  NUMBER not null
+        constraint "Hallgato_Ertesites_Hallgato_fk"
+            references "Hallgato"
+                on delete cascade,
+    "he_Ertesites_id" NUMBER not null
+        constraint "Hallgato_Ertesites_Ert_fk"
+            references "Ertesites"
+                on delete cascade
+)
+/
+
+create table "Szak_Kar"
+(
+    "sk_Szak_id" NUMBER not null
+        constraint "Szak_Kar_Szak_fk"
+            references "Szak"
+                on delete cascade,
+    "sk_Kar_id"  NUMBER not null
+        constraint "Szak_Kar_Kar_fk"
+            references "Kar"
+                on delete cascade
+)
+/
+
+create table "Szak_Diploma"
+(
+    "sd_Szak_id"    NUMBER not null
+        constraint "Szak_Diploma_Szak_fk"
+            references "Szak"
+                on delete cascade,
+    "sd_Diploma_id" NUMBER not null
+        constraint "Szak_Diploma_Diploma_fk"
+            references "Diploma"
+                on delete cascade
+)
+/
+
+create table "Hallgato_Kurzus"
+(
+    "hk_Hallgato_id" NUMBER not null
+        constraint "Hallgato_Kurzus_Hallgato_fk"
+            references "Hallgato"
+                on delete cascade,
+    "hk_Kurzus_id"   NUMBER not null
+        constraint "Hallgato_Kurzus_Kurzusl_fk"
+            references "Kurzus"
+                on delete cascade,
+    "Erdem_jegy"  NUMBER
+)
+/
+
+create table "Hallgato_Forum"
+(
+    "hf_Hallgato_id" NUMBER not null
+        constraint "Hallgato_Forum_Hallgato_fk"
+            references "Hallgato"
+                on delete cascade,
+    "hf_Forum_id"    NUMBER not null
+        constraint "Hallgato_Forum_Forum_fk"
+            references "Forum"
+                on delete cascade
+)
+/
+
+COMMIT;
+
+INSERT INTO "Admin" (JELSZO) VALUES ('$2y$10$Ao/lO1uS/6qCUAagdmgopeUqVrmr4M5K6ORbhY2G9c1/biQRbSmZi');
+
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (5, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (4, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (3, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (2, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (5, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (5, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (5, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (4, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (3, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (3, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (3, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (3, 2022, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (3, 2021, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (3, 2021, 180);
+INSERT INTO "Diploma" (ZV_JEGY, VEGZES_EVE, KREDIT) VALUES (3, 2021, 180);
+
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (TIMESTAMP '2023-03-25 17:29:03', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2022-02-23', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (TIMESTAMP '2022-03-11 17:30:07', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (TIMESTAMP '2022-08-25 17:30:22', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2022-08-24', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2022-08-24', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2022-08-24', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2022-08-23', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2022-08-23', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2021-02-11', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2021-02-11', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2021-02-11', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2021-02-10', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2021-02-09', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2022-02-09', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2022-02-09', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2022-02-09', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2021-08-24', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2021-08-24', 'Sikeres Kurzusfelvetel!');
+INSERT INTO "Ertesites" (ERTESITES_IDOPONT, UZENET) VALUES (DATE '2021-08-23', 'Sikeres Kurzusfelvetel!');
+
+INSERT INTO "Forum" (UZENET, UZENET_IDOPONT) VALUES ('Imadom ezt a kurzust!', TIMESTAMP '2022-03-09 18:07:24');
+INSERT INTO "Forum" (UZENET, UZENET_IDOPONT) VALUES ('Ha segitsegre van szuksegetek irjatok nyugodtan ide a forumra! ', TIMESTAMP '2022-03-19 18:07:30');
+INSERT INTO "Forum" (UZENET, UZENET_IDOPONT) VALUES ('Az elso zh-t jovoheten irjuk.', TIMESTAMP '2022-03-09 18:09:15');
+INSERT INTO "Forum" (UZENET, UZENET_IDOPONT) VALUES ('Sziasztok!', TIMESTAMP '2022-02-07 18:09:47');
+INSERT INTO "Forum" (UZENET, UZENET_IDOPONT) VALUES ('Sziasztok!', TIMESTAMP '2023-02-06 18:10:24');
+
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('ABC122', 'Savanya Benedek', 1, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('ABC123', 'Savanya Balazs', 4, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('ABC126', 'Savanya Bela', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('BGZ786', 'Markovics Johanna', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('CFRJ67', 'Szentpetervari Eva', 1, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('CFTG54', 'Nagy Peter', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('CPFM9S', 'Tatar Liliana', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('DERGZ2', 'Peterfy Pal', 1, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('dfgr54', 'Szalma Jozsef', 6, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('DRJTRD', 'Kiraly Barnabas', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('FOYFAY', 'Koszo Kata', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('FRDE45', 'Borbola Milan Janos', 5, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('FRDKU8', 'Nemeth Ferenc', 5, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('FRGD56', 'Bus Kitty', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('FRGZ34', 'Karo Monika', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('GTHZU9', 'Varga Nora', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('HGFH16', 'Racz Maja', 1, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('isdf', 'Tatar Lujza', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('JHZUT4', 'Radnai Eszter', 1, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('KLIUC3', 'Balogh Katalin', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('KLOUHF', 'Savanya Kinga', 1, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('LKOP76', 'Kovacs Agnes', 1, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('MLKJU5', 'Nemeth Noel', 1, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('OIHI54', 'Fabian Janos', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('PORCXE', 'Perecz Norbert', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('SERF87', 'Szilagyi Aron', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('TRDKZD', 'Szabo Emoke', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('TSHRE3', 'Fulop Lena', 3, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('VFRIU9', 'Csikos Zsuzsa', 5, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+INSERT INTO "Hallgato" (NEPTUN_KOD, HALLGATO_NEV, FELEV, JELSZO) VALUES ('VGHZT1', 'Kiss Judit', 1, '$2y$10$t6XAFY4QXAbhX2aJ3rr/re6W6yVShkVXoHgasUIE7/Qo6XjhWvY2W');
+
+
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Termeszettudomanyi es Informatikai Kar', 'TTIK');
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Egeszsegtudomanyi es Szocialis Kepzesi Kar', 'ETSZK');
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Mernoki Kar', 'MK');
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Gazdasagtudomanyi Kar', 'GTK');
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Bolcsesztudomanyi Kar', 'BTK');
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Gyogyszeresztudomanyi Kar', 'GYTK');
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Bartok Bela Muveszeti Kar', 'BBMK');
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Allam- es Jogtudomanyi Kar', 'AJTK');
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Fogorvostudomanyi Kar', 'FOK');
+INSERT INTO "Kar" (KAR_NEV, KAR_KOD) VALUES ('Juhasz Gyula Pedagogus Kepzo Kar', 'JGYPK');
+
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('BTGE-06', 3, 6, 6, 'Betegellatas', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('CPF-L-1', 3, NULL, 3, 'Celnyelvi civilizacio',1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('CSAJ-E-17', 2, 4, 4, 'Csaladi jogok', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('CSGJ-E-05', 3, 2, 2, 'Petofi Sandor munkassaga eloadas', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('ELM-12', 5, 2, 2, 'Elelmiszerek gyartasa', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('EPTSZ-08-E', 3, 2, 2, 'Magasepiteszeti alapismeretek alapfokon',0);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('FIZKA-01', 1, 2, 2, 'Fizika mernokoknek',0);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('FOGSZ-08', 3, 2, 2, 'Szajsebeszet',1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('FSZV02', 5, 2, 2, 'Dogszabalyozasi alapismeretek',0);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('GKBN08', 2, 2, 4, 'Mikrookonomia',0);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('GKBN09', 5, 2, 2, 'Vallalati penzugyek',1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('HNVD-E-A', 0, 2, 2, 'Honvedelmi alapismeretek',1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('IB372', 2, 4, 4, 'Buntetojog', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('IB407E', 1, 2, 2, 'Szamitogep halozatok eloadas', 0);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('IB501E', 1, 2, 3, 'Buntetojog eloadas', 0);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('IB911', 3, 1, 1, 'Koltsegvetesi kapcsolatok', 0);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('IBK304', 3, 1, 2, 'Algoritmusok es adatszerkezetek', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('MARK-02', 3, 2, 2, '\"Trash food\" valoban rossz?', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('MBNXK111', 2, 2, 3, 'Diszkret matematika I.', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('MSZV 01', 2, 2, 2, 'Fuvos zenekar gyakorlat', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('PSZIC-19', 3, 2, 2, 'Pszichologia a gyakorlatban', 0);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('SPAK-18', 3, 4, 4, 'Spanyol kultura', 0);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('SZETE-01', 0, 2, 5, 'Szabadegyetem I.', 1);
+INSERT INTO "Kurzus" (KURZUS_KOD, AJANLOTT_FELEV, ORASZAM, KREDIT, KURZUS_NEV, MEGNYITVA) VALUES ('VFRD13-GY', 3, 4, 4, 'Tanitasi gyakorlat', 1);
+
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Tatar Abel', 'ABC123', 'Egyetemi tanar', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Orosz Balazs', 'AYXCR3', 'Egyetemi docens', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Orosz Aron', 'CDFR52', 'Mesteroktato', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Balint Rebeka', 'DERGZ5', 'Egyetemi tanar', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Farkas Johanna Anna', 'DEWQSA', 'Egyetemi docens', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Boros Antal', 'DJTGH', 'Egyetemi docens', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Nagy Adel', 'DRGZHU', 'Egyetemi tanarseged', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Biro Kristof', 'GTRFDW', 'Adjunktus', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Sandor Katalin', 'GZTCSA', 'Adjunktus', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Somogyi Jeno', 'HGRDT5', 'Tanarseged', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Bognar Zsolt', 'HGZUIO', 'Egyetemi tanar', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Papp Beatrix', 'KLOPE3', 'Egyetemi docens', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Szucs Milan', 'KLOPU1', 'Tanarseged', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Palffy Tibor', 'KLOUZ1', 'Mesteroktato', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Gyergely Antal', 'LPOKUA', 'Adjunktus', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Kovacs Laszlo', 'MNJHZ8', 'Adjunktus', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Varga Johanna', 'OZTRE2', 'Egyetemi tanar', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Abraham Anett', 'PREWSQ', 'Egyetemi tanar', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Feher Klaudia', 'SAQWYC', 'Egyetemi tanar', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Halasz Patricia', 'SDGT67', 'Adjunktus', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Varga Geza', 'SWGFT7', 'Mesteroktato', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Varga Geza', 'TFZDT9', 'Tanarseged', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Juhasz Milan', 'VCFT51', 'Adjunktus', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Kovacs Anna', 'VCXE97', 'Tanarseged', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Pataki Valeria', 'VFGUZT', 'Adjunktus', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Csaszar Bela', 'XSAES0', 'Egyetemi docens', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Dr. Pinter Laszlo', 'ZDKZ36', 'Egyetemi docens', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+INSERT INTO "Oktato" (OKTATO_NEV, NEPTUN_KOD, BEOSZTAS, JELSZO) VALUES ('Savanya Balazsne', 'ZUK777', 'Egyetemi tanar', '$2y$10$13DCMd1HoS2nkW4p4o9BbubE2U8GlIVfUzYLlh9MVGaLis1ME3g7e');
+
+INSERT INTO "Ora" (NAP, ORA) VALUES (1, 10);
+INSERT INTO "Ora" (NAP, ORA) VALUES (3, 10);
+INSERT INTO "Ora" (NAP, ORA) VALUES (2, 14);
+INSERT INTO "Ora" (NAP, ORA) VALUES (3, 16);
+INSERT INTO "Ora" (NAP, ORA) VALUES (4, 08);
+INSERT INTO "Ora" (NAP, ORA) VALUES (5, 15);
+INSERT INTO "Ora" (NAP, ORA) VALUES (4, 10);
+INSERT INTO "Ora" (NAP, ORA) VALUES (5, 09);
+INSERT INTO "Ora" (NAP, ORA) VALUES (1, 15);
+INSERT INTO "Ora" (NAP, ORA) VALUES (2, 08);
+INSERT INTO "Ora" (NAP, ORA) VALUES (3, 08);
+INSERT INTO "Ora" (NAP, ORA) VALUES (4, 18);
+INSERT INTO "Ora" (NAP, ORA) VALUES (5, 08);
+INSERT INTO "Ora" (NAP, ORA) VALUES (2, 10);
+INSERT INTO "Ora" (NAP, ORA) VALUES (2, 12);
+INSERT INTO "Ora" (NAP, ORA) VALUES (1, 14);
+INSERT INTO "Ora" (NAP, ORA) VALUES (1, 09);
+INSERT INTO "Ora" (NAP, ORA) VALUES (3, 08);
+INSERT INTO "Ora" (NAP, ORA) VALUES (4, 10);
+INSERT INTO "Ora" (NAP, ORA) VALUES (5, 10);
+INSERT INTO "Ora" (NAP, ORA) VALUES (4, 16);
+INSERT INTO "Ora" (NAP, ORA) VALUES (1, 08);
+INSERT INTO "Ora" (NAP, ORA) VALUES (2, 18);
+INSERT INTO "Ora" (NAP, ORA) VALUES (3, 12);
+
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Gazdasaginformatikus', 'BSZK-GAI');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('matematikus', 'TTIK-MAT');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Mernokinformatikus', 'TTIK-MINF');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Gyogytornasz', 'ETSZK-GYT');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Apolo', 'ETSZK-APOL');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Gepeszmernok', 'MK-GEM');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Penzugy es szamvitel', 'GTK-PSZ');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Programtervezo informatikus', 'TTIK-PTI');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Elelmiszermernok', 'MK-ELM');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Neprajz', 'BTK-NEP');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('angol-magyar szakos tanar', 'JGYPK-AMT');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Gyogyszeresz', 'ETSZK-GYOG');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Pszichologia', 'ETSZK-PSZI');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Klasszikus fuvola', 'BBMK-KF');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Jogasz', 'AJTK-JOG');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Fogorvos', 'FOK-FOG');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Vonos szakirany', 'BBMK-VON');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Magyar', 'BTK-MAGY');
+INSERT INTO "Szak" (SZAK_NEV, SZAK_KOD) VALUES ('Marketing es menedzsment', 'GTK-MM');
+
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Ady epulet', '300', 30, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Ady epulet', '502', 20, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Batok Bela epulet', '321', 20, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Beke epulet', '205', 80, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Bolyai', '103', 15, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Bolyai', '205', 35, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('I. sz. Belgyogaszati Klinika', '1', 10, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Irinyi', '100', 30, 35);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Irinyi', '203', 40, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Irinyi', '312', 60, 63);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Irinyi', '413', 40, 45);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Irinyi epulet', '113', 30, 35);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Irinyi epulet', '313', 30, 33);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Juhasz Gyula epulet', '102', 30, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Kiss Arpad epulet', '123', 30, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Lechner', '203', 40, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Lechner epulet', '215', 200, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Petofi', '215', 10, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Petofi epulet', '214', 15, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Sebeszeti Klinika', '102', 10, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('Semmelweis epulet', '111', 30, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('TIK', '1', 1000, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('TIK', '2', 500, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('TIK', '3', 300, 0);
+INSERT INTO "Terem" (EPULET, TEREM_NEV, FEROHELY, GEPEK_SZAMA) VALUES ('TIK ', '5', 1500, 0);
+
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2023-06-14 14:00:00');
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2023-07-19 13:00:00');
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2023-08-02 15:00:00');
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2022-01-12 16:00:00');
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2022-12-16 12:00:00');
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2022-12-10 10:00:00');
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2022-08-18 08:00:00');
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2022-01-10 11:00:00');
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2022-01-07 10:00:00');
+INSERT INTO "Vizsga" (VIZSGA_IDOPONT) VALUES (TIMESTAMP '2022-01-06 09:00:00');
+
+COMMIT;
+
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (9, 1);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (8, 2);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (8, 3);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (11, 4);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (23, 5);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (22, 6);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (22, 7);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (15, 8);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (24, 9);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (3, 10);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (26, 11);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (27, 12);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (20, 13);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (5, 14);
+INSERT INTO "Hallgato_Diploma" ("hd_Hallgato_id", "hd_Diploma_id") VALUES (6, 15);
+
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (3, 1);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (3, 2);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (4, 3);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (5, 4);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (6, 5);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (21, 6);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (22, 7);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (17, 8);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (7, 9);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (18, 10);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (18, 11);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (18, 12);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (19, 13);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (24, 14);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (27, 15);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (30, 16);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (29, 17);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (8, 18);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (9, 19);
+INSERT INTO "Hallgato_Ertesites" ("he_Hallgato_id", "he_Ertesites_id") VALUES (10, 20);
+
+--hallgato-forumban nincs rekord---
+
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (1,16,3);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (1,23,5);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (5,1,2);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (5,13,4);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (8,12,4);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (7,22,5);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (7,2,3);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (10,10,5);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (25,4,3);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (25,9,5);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (29,19,5);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (20,15,3);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (18,1,3);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (17,15,5);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (17,17,2);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (14,17,1);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (14,14,5);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (13,13,2);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (13,16,5);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (22,1,3);
+INSERT INTO "Hallgato_Kurzus" ("hk_Hallgato_id", "hk_Kurzus_id", "Erdem_jegy") VALUES (22,8,5);
+
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 1);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 2);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (14, 3);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (20, 4);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (20, 5);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (20, 6);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (14, 7);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (20, 8);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 9);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 10);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (20, 11);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (14, 12);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (14, 13);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 14);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 15);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 16);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 17);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 18);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (20, 19);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (14, 20);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (20, 21);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 21);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (14, 23);
+INSERT INTO "Hallgato_Ora" ("ho_Hallgato_id", "ho_Ora_id") VALUES (30, 24);
+
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (1, 1);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (2, 1);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (3, 3);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (4, 5);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (5, 4);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (6, 5);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (7, 5);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (8, 6);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (9, 14);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (10, 9);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (11, 9);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (12, 6);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (13, 7);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (14, 8);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (15, 18);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (16, 19);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (17, 15);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (18, 2);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (19, 10);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (20, 10);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (21, 11);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (22, 12);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (23, 13);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (24, 16);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (25, 16);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (26, 17);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (27, 18);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (28, 19);
+INSERT INTO "Hallgato_Szak" ("hs_Hallgato_id", "hs_Szak_id") VALUES (29, 1);
+
+INSERT INTO "Kuzus_Forum" ("kf_Kurzus_id", "kf_Forum_id") VALUES (19, 4);
+INSERT INTO "Kuzus_Forum" ("kf_Kurzus_id", "kf_Forum_id") VALUES (19, 1);
+INSERT INTO "Kuzus_Forum" ("kf_Kurzus_id", "kf_Forum_id") VALUES (19, 3);
+INSERT INTO "Kuzus_Forum" ("kf_Kurzus_id", "kf_Forum_id") VALUES (3, 5);
+INSERT INTO "Kuzus_Forum" ("kf_Kurzus_id", "kf_Forum_id") VALUES (17, 2);
+
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (1, 28);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (2, 11);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (3, 5);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (4, 4);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (5, 9);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (6, 16);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (7, 17);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (8, 23);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (9, 26);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (10, 18);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (11, 14);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (12, 2);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (13, 3);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (14, 7);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (15, 8);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (16, 25);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (17, 12);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (18, 10);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (19, 11);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (20, 5);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (21, 13);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (22, 22);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (23, 1);
+INSERT INTO "Kuzus_Oktato" ("ko_Kurzus_id", "ko_Oktato_id") VALUES (24, 24);
+
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (16, 1);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (23, 2);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (1, 3);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (13, 4);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (22, 5);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (2, 6);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (12, 7);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (10, 8);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (13, 9);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (16, 10);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (17, 11);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (14, 12);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (15, 13);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (17, 14);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (2, 15);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (15, 16);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (1, 17);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (8, 18);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (4, 19);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (9, 20);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (19, 21);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (3, 22);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (5, 23);
+INSERT INTO "Kuzus_Ora" ("ko_Kurzus_id", "ko_Ora_id") VALUES (6, 24);
+
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (1, 25);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (2, 11);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (3, 5);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (4, 4);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (5, 9);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (6, 16);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (7, 17);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (8, 23);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (9, 20);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (10, 18);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (11, 14);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (12, 2);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (13, 3);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (14, 7);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (15, 8);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (16, 21);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (17, 12);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (18, 10);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (19, 11);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (20, 5);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (21, 13);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (22, 22);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (23, 1);
+INSERT INTO "Kuzus_Terem" ("kt_Kurzus_id", "kt_Terem_id") VALUES (24, 24);
+
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (4, 1);
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (6, 2);
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (6, 3);
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (7, 4);
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (11, 5);
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (15, 6);
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (20, 7);
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (1, 8);
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (3, 9);
+INSERT INTO "Kuzus_Vizsga" ("kv_Kurzus_id", "kv_Vizsga_id") VALUES (12, 10);
+
+INSERT INTO "Oktato_Forum" ("of_Oktato_id", "of_Forum_id") VALUES (11, 1);
+INSERT INTO "Oktato_Forum" ("of_Oktato_id", "of_Forum_id") VALUES (12, 2);
+INSERT INTO "Oktato_Forum" ("of_Oktato_id", "of_Forum_id") VALUES (11, 3);
+INSERT INTO "Oktato_Forum" ("of_Oktato_id", "of_Forum_id") VALUES (11, 4);
+INSERT INTO "Oktato_Forum" ("of_Oktato_id", "of_Forum_id") VALUES (5, 5);
+
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (1, 10);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (2, 8);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (3, 7);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (4, 6);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (4, 5);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (6, 4);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (7, 3);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (8, 2);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (9, 1);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (10, 10);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (11, 9);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (12, 8);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (13, 7);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (14, 6);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (15, 5);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (16, 4);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (17, 3);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (17, 2);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (19, 1);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (20, 9);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (21, 8);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (22, 7);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (23, 6);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (24, 5);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (25, 1);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (16, 3);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (27, 2);
+INSERT INTO "Oktato_Kar" ("ok_Oktato_id", "ok_Kar_id") VALUES (28, 10);
+
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (1, 24);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (2, 1);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (3, 3);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (4, 5);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (5, 4);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (6, 5);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (7, 22);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (8, 6);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (9, 14);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (10, 9);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (11, 20);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (12, 6);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (13, 7);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (14, 8);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (15, 18);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (16, 19);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (17, 15);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (18, 21);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (19, 10);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (20, 2);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (21, 11);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (22, 24);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (23, 13);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (24, 23);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (25, 16);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (26, 24);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (27, 18);
+INSERT INTO "Oktato_Ora" ("oo_Oktato_id", "oo_Ora_id") VALUES (28, 19);
+
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (7, 1);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (7, 2);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (7, 3);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (16, 4);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (13, 5);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (12, 6);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (12, 7);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (9, 8);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (14, 9);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (3, 10);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (18, 11);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (18, 12);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (4, 13);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (5, 14);
+INSERT INTO "Szak_Diploma" ("sd_Szak_id", "sd_Diploma_id") VALUES (7, 15);
+
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (1, 1);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (2, 1);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (3, 1);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (4, 2);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (5, 2);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (6, 3);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (7, 4);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (8, 1);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (9, 3);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (10, 5);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (11, 10);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (12, 2);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (13, 2);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (14, 7);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (15, 8);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (16, 9);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (17, 7);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (18, 5);
+INSERT INTO "Szak_Kar" ("sk_Szak_id", "sk_Kar_id") VALUES (19, 4);
+
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (1, 7);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (2, 12);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (3, 17);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (4, 13);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (5, 11);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (6, 4);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (7, 5);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (8, 18);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (9, 17);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (10, 3);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (11, 9);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (12, 17);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (13, 17);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (14, 10);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (15, 17);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (16, 9);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (17, 10);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (18, 11);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (19, 5);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (20, 16);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (21, 15);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (22, 12);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (23, 17);
+INSERT INTO "Kuzus_Szak" ("ks_Kurzus_id", "ks_Szak_id") VALUES (24, 13);
+
+COMMIT;

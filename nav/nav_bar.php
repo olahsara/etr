@@ -89,6 +89,7 @@ $page = explode('/',$_SERVER['PHP_SELF']);
             </li>
             <li<?php if(end($page)==="h_orarend_page.php")   { echo " class=\"active\""; } ?>><a href="/etr/role/hallgato/orarend/h_orarend_page.php"> Órarend</a></li>
             <li<?php if(end($page)==="h_vizsga_page.php")   { echo " class=\"active\""; } ?>><a href="/etr/role/hallgato/vizsgak/h_vizsga_page.php"> Vizsgák</a></li>
+            <li<?php if(end($page)==="a_select_page.php")   { echo " class=\"active\""; } ?>><a href="/etr/role/hallgato/select/a_select_page.php"> Statisztikák</a></li>
 
         <?php } else ?>
 
