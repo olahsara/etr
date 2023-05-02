@@ -60,8 +60,9 @@ include_once('../../../functions/functions.php');
         echo $ora.':00';
         echo '</td>';
         for ($j = 0; $j < 5; $j++) {
-            if($table[$i][$j] !== 'Nincs ora' ) {
-                $tmp = explode('/',$table[$i][$j]);
+            $tmp = explode('/',$table[$i][$j]);
+            if(isset($tmp[1])) {
+
                 echo '<td>';
                 echo '<b>'.$tmp[1].' ('.$tmp[0].')</b><br>'
                     .$tmp[2].'<br>'
